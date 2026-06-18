@@ -1,12 +1,6 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata = {
   title: "Legal Ease",
@@ -19,7 +13,7 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       data-theme="light"
-      className={`${inter.className} h-full antialiased bg-[#f8f4e9] text-[#43311c]`}
+      className="font-sans h-full antialiased bg-[#f8f4e9] text-[#43311c]"
     >
       <body className="min-h-full flex flex-col">
         <Navbar />

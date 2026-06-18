@@ -12,11 +12,12 @@ export default function FeaturedCard({ lawyer }) {
         </div>
         <div className="px-2 pb-2">
           <h3 className="text-xl font-medium mb-1">{lawyer.name}</h3>
-          <p className="text-gray-600">{lawyer.role}</p>
+          <p>{lawyer.role}</p>
 
+          <p className="text-gray-600 mt-4">${lawyer.rate}/hr</p>
           <Link
             href="/lawyers"
-            className="mt-4 btn bg-[#43311c] text-[#fdfbf7] hover:bg-[#352514] border-none rounded-none px-5 py-2 min-h-0 h-auto font-medium text-xs tracking-wider shrink-0 uppercase"
+            className="mt-1 btn bg-[#43311c] text-[#fdfbf7] hover:bg-[#352514] border-none rounded-none px-5 py-2 min-h-0 h-auto font-medium text-xs tracking-wider shrink-0 uppercase"
           >
             View Profile
           </Link>
