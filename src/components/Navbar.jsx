@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowRightToSquare } from "@gravity-ui/icons";
 
 export default function Navbar() {
   return (
@@ -29,12 +30,12 @@ export default function Navbar() {
             <Link href="/" className="underline underline-offset-4">
               Home
             </Link>
-            <Link href="/browse-lawyers">Browse Lawyers</Link>
+            <Link href="/lawyers">Browse Lawyers</Link>
             <Link href="/dashboard">Dashboard</Link>
           </ul>
         </div>
         <Link href="/" className="btn btn-ghost text-2xl font-extrabold">
-          Legal Ease
+            Legal Ease
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -42,7 +43,7 @@ export default function Navbar() {
           <Link href="/" className="underline underline-offset-4">
             Home
           </Link>
-          <Link href="/browse-lawyers">Browse Lawyers</Link>
+          <Link href="/lawyers">Browse Lawyers</Link>
           <Link href="/dashboard">Dashboard</Link>
         </ul>
       </div>
@@ -66,8 +67,7 @@ export default function Navbar() {
           </svg>
           <input type="search" required placeholder="Search" />
         </label>
-        <a className="btn bg-[#442c05] text-white">Login</a>
-        {/* <a className="btn btn-ghost">Login</a> */}
+        <a className="btn bg-[#442c05] text-white"><ArrowRightToSquare /> Login</a>
       </div>
     </div>
   );
