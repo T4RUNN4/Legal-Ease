@@ -1,4 +1,5 @@
 "use client";
+import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
 export default function Hero() {
@@ -55,9 +56,9 @@ export default function Hero() {
               </span>
             </h1>
             
-            <button className="btn bg-[#fdfbf7] text-[#43311c] hover:bg-[#e6e2db] border-none rounded-none px-8 py-3 min-h-0 h-auto font-medium text-sm tracking-wider uppercase transition-transform hover:-translate-y-1">
-              Browse Lawyers ↗
-            </button>
+            <Link href="/lawyers" className="btn bg-[#fdfbf7] text-[#43311c] hover:bg-[#e6e2db] border-none rounded-none px-8 py-3 min-h-0 h-auto font-medium text-sm tracking-wider uppercase transition-transform hover:-translate-y-1">
+              Browse Lawyers
+            </Link>
             
           </div>
         </div>

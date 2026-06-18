@@ -109,11 +109,11 @@ export default function Lawyers() {
               // Browse Lawyers
             </span>
             <h2 className="text-4xl md:text-5xl font-serif font-medium leading-tight">
-                Explore Our Diverse Team Of Legal Experts Across All Practice Areas
+                Explore Our Diverse List Of Legal Experts Across All Practice Areas
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
               {lawyers.map((lawyer, index) => (
                 <FeaturedCard key={index} lawyer={lawyer} />
               ))}
