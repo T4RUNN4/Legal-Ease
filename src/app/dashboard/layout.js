@@ -10,7 +10,11 @@ export default function RootLayout({ children }) {
               (User) Hiring History{" "}
             </Link>
           </li>
-          <li>(User) Update Profile</li>
+          <li>
+            <Link href="/dashboard/user/update-profile">
+              (User) Update Profile{" "}
+            </Link>
+          </li>
           <li>(User) Comments</li>
           <li>
             <Link href="/dashboard/lawyer/hiring-history">

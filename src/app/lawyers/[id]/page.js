@@ -24,7 +24,7 @@ export default function LawyerDetails() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           <div className="lg:col-span-5 bg-[#352514] border border-white/10 p-6 md:p-8 sticky top-6">
             
-            <div className="w-full aspect-[4/5] bg-neutral relative overflow-hidden mb-6">
+            <div className="w-full aspect-4/5 bg-neutral relative overflow-hidden mb-6">
               <img 
                 src={lawyer.photo} 
                 alt={`Professional portrait of ${lawyer.name}`} 
@@ -76,7 +76,7 @@ export default function LawyerDetails() {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium leading-tight mb-4">
                 {lawyer.name}
               </h1>
-              <div className="w-20 h-[3px] bg-[#c5a880]"></div>
+              <div className="w-20 h-0.75 bg-[#c5a880]"></div>
             </div>
 
             <div className="space-y-6 text-base md:text-lg leading-relaxed text-[#c7bca9]">
