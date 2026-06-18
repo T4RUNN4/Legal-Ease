@@ -27,7 +27,9 @@ export default function RootLayout({ children }) {
           <li>
             <Link href="/dashboard/admin/transactions">All Transactions</Link>
           </li>
-          <li>Analytics</li>
+          <li>
+            <Link href="/dashboard/admin/analytics">Analytics</Link>
+          </li>
         </ul>
       </div>
       <div className="flex justify-center w-full">{children}</div>
