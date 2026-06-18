@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -15,10 +16,23 @@ export default function Register() {
 
   const password = watch("password");
 
-  const onSubmit = (data) => {
-    toast.success("Registration Successful");
-    console.log(data);
-    reset();
+  const onSubmit = async (data) => {
+    const { data: res, error } = await authClient.signUp.email({
+    name: data.name,
+    email: data.email,
+    password: data.password,
+    role: data.role,
+    image: data.photo,
+    callbackURL: "/login",
+});
+
+    if(error) {
+      toast.error("Something went wrong")
+      console.log(error);
+    } else {
+      toast.success("Registration Successful");
+      reset();
+    }
   };
 
   return (
