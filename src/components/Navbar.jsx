@@ -26,11 +26,58 @@ export default function Navbar() {
             tabIndex="-1"
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
-            <Link href="/" className="underline underline-offset-4">
-              Home
-            </Link>
-            <Link href="/lawyers">Browse Lawyers</Link>
-            <Link href="/dashboard">Dashboard</Link>
+            <li>
+              <Link href="/" className="underline underline-offset-4">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link href="/lawyers">Browse Lawyers</Link>
+            </li>
+            <li>
+              <Link href="/dashboard">Dashboard</Link>
+              <ul className="p-2">
+                <li className="mt-10">User Menu</li>
+                <li>
+                  <Link href="/dashboard/user/hiring-history">
+                    Hiring History
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/dashboard/user/update-profile">
+                    Update Profile
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/dashboard/user/comments">Comments</Link>
+                </li>
+
+                <li className="mt-10">Lawyer Menu</li>
+                <li>
+                  <Link href="/dashboard/lawyer/hiring-history">
+                    Hiring History
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/dashboard/lawyer/legal-profile">
+                    Manage Legal Profile
+                  </Link>
+                </li>
+
+                <li className="mt-10">Admin Menu</li>
+                <li>
+                  <Link href="/dashboard/admin/user-list">Manage Users</Link>
+                </li>
+                <li>
+                  <Link href="/dashboard/admin/transactions">
+                    All Transactions
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/dashboard/admin/analytics">Analytics</Link>
+                </li>
+              </ul>
+            </li>
           </ul>
         </div>
         <Link href="/" className="btn btn-ghost text-2xl font-extrabold">
@@ -39,11 +86,59 @@ export default function Navbar() {
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 flex gap-6">
-          <Link href="/" className="underline underline-offset-4">
-            Home
-          </Link>
-          <Link href="/lawyers">Browse Lawyers</Link>
-          <Link href="/dashboard">Dashboard</Link>
+          <li>
+            <Link href="/" className="underline underline-offset-4">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link href="/lawyers">Browse Lawyers</Link>
+          </li>
+          <li>
+            <details>
+              <summary>
+                <Link href="/dashboard">Dashboard</Link>
+              </summary>
+              <ul className="p-2 bg-base-100 w-40 z-1">
+                <li>
+                  <Link href="/dashboard/user/hiring-history">
+                    Hiring History
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/dashboard/user/update-profile">
+                    Update Profile
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/dashboard/user/comments">Comments</Link>
+                </li>
+
+                <li>
+                  <Link href="/dashboard/lawyer/hiring-history">
+                    Hiring History
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/dashboard/lawyer/legal-profile">
+                    Manage Legal Profile
+                  </Link>
+                </li>
+
+                <li>
+                  <Link href="/dashboard/admin/user-list">Manage Users</Link>
+                </li>
+                <li>
+                  <Link href="/dashboard/admin/transactions">
+                    All Transactions
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/dashboard/admin/analytics">Analytics</Link>
+                </li>
+              </ul>
+            </details>
+          </li>
         </ul>
       </div>
       <div className="navbar-end flex flex-row gap-4">
