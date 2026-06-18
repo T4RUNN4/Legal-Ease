@@ -16,7 +16,7 @@ export default function BestLawyer({ lawyer }) {
           <p className="text-sm text-[#c7bca9] mb-4">{lawyer.role}</p>
           <a
             href="#"
-            className="text-xs font-semibold tracking-wider text-[#c5a880] hover:text-[#fdfbf7] transition-colors flex items-center gap-1"
+            className="text-xs font-semibold tracking-wider text-[#c5a880] hover:text-black transition-colors flex items-center gap-1"
           >
             View Profile <span className="text-[10px]">→</span>
           </a>
