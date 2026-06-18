@@ -26,7 +26,7 @@ export default function FeaturedLawyers() {
   ];
 
   return (
-    <section className="bg-[#43311c] py-20 px-6 md:px-12 lg:px-24 font-sans text-[#fdfbf7]">
+    <section className="bg-[#442c05] py-20 px-6 md:px-12 lg:px-24 font-sans text-[#fdfbf7]">
       <div className="max-w-7xl mx-auto">
         
         <div className="flex flex-col lg:flex-row justify-between items-start gap-10 mb-16">
