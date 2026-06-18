@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ArrowRightToSquare } from "@gravity-ui/icons";
 
 export default function Navbar() {
   return (
@@ -67,7 +66,7 @@ export default function Navbar() {
           </svg>
           <input type="search" required placeholder="Search" />
         </label>
-        <a className="btn bg-[#442c05] text-white"><ArrowRightToSquare /> Login</a>
+        <a className="btn bg-[#442c05] text-white">Login</a>
       </div>
     </div>
   );
