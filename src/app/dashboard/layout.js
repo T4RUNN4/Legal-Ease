@@ -15,7 +15,11 @@ export default function RootLayout({ children }) {
               (User) Update Profile{" "}
             </Link>
           </li>
-          <li>(User) Comments</li>
+          <li>
+            <Link href="/dashboard/user/comments">
+              (User) Comments{" "}
+            </Link>
+          </li>
           <li>
             <Link href="/dashboard/lawyer/hiring-history">
               (Lawyer) Hiring History{" "}
@@ -27,9 +31,7 @@ export default function RootLayout({ children }) {
           <li>(Admin) Analytics</li>
         </ul>
       </div>
-      <div className="flex justify-center w-full">
-        {children}
-      </div>
+      <div className="flex justify-center w-full">{children}</div>
     </div>
   );
 }
