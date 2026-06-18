@@ -5,7 +5,7 @@ export default function RootLayout({ children }) {
     <div className="flex flex-row gap-6">
       <div>
         <ul className="menu bg-[#43311c] min-h-screen text-white py-4 px-8 flex flex-col gap-4 text-base">
-          <li>User Menu</li>
+          <li className="mt-10">User Menu</li>
           <li>
             <Link href="/dashboard/user/hiring-history">Hiring History</Link>
           </li>
@@ -15,12 +15,16 @@ export default function RootLayout({ children }) {
           <li>
             <Link href="/dashboard/user/comments">Comments</Link>
           </li>
-          <li>Lawyer Menu</li>
+
+          <li className="mt-10">Lawyer Menu</li>
           <li>
             <Link href="/dashboard/lawyer/hiring-history">Hiring History</Link>
           </li>
-          <li>Manage Legal Profile</li>
-          <li>Admin Menu</li>
+          <li>
+            <Link href="/dashboard/lawyer/legal-profile">Manage Legal Profile</Link>
+          </li>
+
+          <li className="mt-10">Admin Menu</li>
           <li>
             <Link href="/dashboard/admin/user-list">Manage Users</Link>
           </li>
