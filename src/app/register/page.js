@@ -4,15 +4,15 @@ export default function Register() {
   return (
     <section className="lg:col-span-4 p-6 md:p-8 space-y-6 max-w-xl mx-auto">
       <div>
-        <h2 className="text-4xl font-medium text-center">Join Legal Ease Family</h2>
+        <h2 className="text-4xl font-medium text-center">
+          Join Legal Ease Family
+        </h2>
       </div>
 
       <form className="space-y-4">
         <div className="form-control w-full">
           <label className="label py-1">
-            <span className="label-text uppercase tracking-wider">
-              Name
-            </span>
+            <span className="label-text uppercase tracking-wider">Name</span>
           </label>
           <input
             type="text"
@@ -24,9 +24,7 @@ export default function Register() {
 
         <div className="form-control w-full">
           <label className="label py-1">
-            <span className="label-text uppercase tracking-wider">
-              Email
-            </span>
+            <span className="label-text uppercase tracking-wider">Email</span>
           </label>
           <input
             type="email"
@@ -76,6 +74,24 @@ export default function Register() {
             placeholder="confirm password"
             required
           />
+        </div>
+
+        <div className="form-control w-full">
+          <label className="label py-1">
+            <span className="label-text uppercase tracking-wider">
+              Your Role
+            </span>
+          </label>
+          <div className="flex gap-4">
+            <div className="flex gap-1">
+              <label className="label">Client</label>
+              <input type="radio" name="radio-1" className="radio" />
+            </div>
+            <div className="flex gap-1">
+              <label className="label">Lawyer</label>
+              <input type="radio" name="radio-1" className="radio" />
+            </div>
+          </div>
         </div>
 
         <button
