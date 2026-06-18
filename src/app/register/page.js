@@ -1,6 +1,26 @@
+"use client";
+
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 export default function Register() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    reset,
+  } = useForm();
+
+  const password = watch("password");
+
+  const onSubmit = (data) => {
+    toast.success("Registration Successful");
+    console.log(data);
+    reset();
+  };
+
   return (
     <section className="lg:col-span-4 p-6 md:p-8 space-y-6 max-w-xl mx-auto">
       <div>
@@ -9,7 +29,7 @@ export default function Register() {
         </h2>
       </div>
 
-      <form className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="form-control w-full">
           <label className="label py-1">
             <span className="label-text uppercase tracking-wider">Name</span>
@@ -18,8 +38,11 @@ export default function Register() {
             type="text"
             className="input w-full border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none h-11"
             placeholder="Enter username"
-            required
+            {...register("name", { required: true })}
           />
+          {errors.name && (
+            <span className="text-sm text-red-500">Name is required</span>
+          )}
         </div>
 
         <div className="form-control w-full">
@@ -30,8 +53,11 @@ export default function Register() {
             type="email"
             className="input w-full border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none h-11"
             placeholder="Enter email"
-            required
+            {...register("email", { required: true })}
           />
+          {errors.email && (
+            <span className="text-sm text-red-500">Email is required</span>
+          )}
         </div>
 
         <div className="form-control w-full">
@@ -44,8 +70,13 @@ export default function Register() {
             type="text"
             className="input w-full border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none h-11"
             placeholder="Enter photo url"
-            required
+            {...register("photo", { required: true })}
           />
+          {errors.photo && (
+            <span className="text-sm text-red-500">
+              Profile Photo is required
+            </span>
+          )}
         </div>
 
         <div className="form-control w-full">
@@ -58,8 +89,19 @@ export default function Register() {
             type="password"
             className="input w-full border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none h-11 "
             placeholder="Enter password"
-            required
+            {...register("password", {
+              required: "Password is required",
+              minLength: {
+                value: 8,
+                message: "Password must be at least 8 characters",
+              },
+            })}
           />
+          {errors.password && (
+            <span className="text-sm text-red-500">
+              {errors.password.message}
+            </span>
+          )}
         </div>
 
         <div className="form-control w-full">
@@ -72,8 +114,17 @@ export default function Register() {
             type="password"
             className="input w-full border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none h-11 "
             placeholder="confirm password"
-            required
+            {...register("confirmPassword", {
+              required: "Please confirm your password",
+              validate: (value) =>
+                value === password || "Passwords do not match",
+            })}
           />
+          {errors.confirmPassword && (
+            <span className="text-sm text-red-500">
+              {errors.confirmPassword.message}
+            </span>
+          )}
         </div>
 
         <div className="form-control w-full">
@@ -85,13 +136,29 @@ export default function Register() {
           <div className="flex gap-4">
             <div className="flex gap-1">
               <label className="label">Client</label>
-              <input type="radio" name="radio-1" className="radio" />
+              <input
+                type="radio"
+                name="radio-1"
+                className="radio"
+                value="client"
+                {...register("role", { required: true })}
+              />
             </div>
             <div className="flex gap-1">
               <label className="label">Lawyer</label>
-              <input type="radio" name="radio-1" className="radio" />
+              <input
+                type="radio"
+                name="radio-1"
+                className="radio"
+                value="lawyer"
+                {...register("role", { required: true })}
+              />
             </div>
           </div>
+
+          {errors.role && (
+            <span className="text-sm text-red-500">Please select a role</span>
+          )}
         </div>
 
         <button

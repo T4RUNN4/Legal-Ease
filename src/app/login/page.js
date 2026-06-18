@@ -1,25 +1,43 @@
+"use client";
+
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 export default function Login() {
+  const {
+      register,
+      handleSubmit,
+      formState: { errors },
+      reset,
+    } = useForm();
+
+    const onSubmit = (data) => {
+    toast.success("Welcome back!");
+    console.log(data);
+    reset();
+  };
+
   return (
     <section className="lg:col-span-4 p-6 md:p-8 space-y-6 max-w-xl mx-auto">
       <div>
         <h2 className="text-4xl font-medium text-center">Welcome Back!</h2>
       </div>
 
-      <form className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="form-control w-full">
           <label className="label py-1">
-            <span className="label-text uppercase tracking-wider">
-              Username
-            </span>
+            <span className="label-text uppercase tracking-wider">email</span>
           </label>
           <input
-            type="text"
+            type="email"
             className="input w-full border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none h-11"
-            placeholder="Enter username"
-            required
+            placeholder="Enter your email"
+            {...register("email", { required: true })}
           />
+          {errors.email && (
+            <span className="text-sm text-red-500">Email is required</span>
+          )}
         </div>
 
         <div className="form-control w-full">
@@ -32,8 +50,11 @@ export default function Login() {
             type="password"
             className="input w-full border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none h-11 "
             placeholder="Enter password"
-            required
+            {...register("password", { required: true })}
           />
+          {errors.password && (
+            <span className="text-sm text-red-500">password is required</span>
+          )}
         </div>
 
         <button
