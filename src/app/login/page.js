@@ -1,21 +1,33 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 export default function Login() {
   const {
-      register,
-      handleSubmit,
-      formState: { errors },
-      reset,
-    } = useForm();
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
 
-    const onSubmit = (data) => {
-    toast.success("Welcome back!");
-    console.log(data);
-    reset();
+  const onSubmit = async (data) => {
+    const { data: res, error } = await authClient.signIn.email({
+      email: data.email,
+      password: data.password,
+      rememberMe: true,
+      callbackURL: "/dashboard",
+    });
+
+    if (error) {
+      toast.error("Something went wrong");
+      console.log(error);
+    } else {
+      toast.success("Welcome Back!");
+      reset();
+    }
   };
 
   return (

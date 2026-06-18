@@ -18,16 +18,16 @@ export default function Register() {
 
   const onSubmit = async (data) => {
     const { data: res, error } = await authClient.signUp.email({
-    name: data.name,
-    email: data.email,
-    password: data.password,
-    role: data.role,
-    image: data.photo,
-    callbackURL: "/login",
-});
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      role: data.role,
+      image: data.photo,
+      callbackURL: "/login",
+    });
 
-    if(error) {
-      toast.error("Something went wrong")
+    if (error) {
+      toast.error("Something went wrong");
       console.log(error);
     } else {
       toast.success("Registration Successful");
