@@ -16,7 +16,7 @@ export default function FeaturedCard({ lawyer }) {
 
           <p className="mt-4">${lawyer.rate}/hr</p>
           <Link
-            href="/lawyers"
+            href="lawyers/1"
             className="mt-1 btn bg-[#43311c] text-[#fdfbf7] hover:bg-[#352514] border-none rounded-none px-5 py-2 min-h-0 h-auto font-medium text-xs tracking-wider shrink-0 uppercase"
           >
             View Profile
