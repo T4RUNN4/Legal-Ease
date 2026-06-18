@@ -34,7 +34,7 @@ export default function Navbar() {
           </ul>
         </div>
         <Link href="/" className="btn btn-ghost text-2xl font-extrabold">
-            Legal Ease
+          Legal Ease
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -66,7 +66,7 @@ export default function Navbar() {
           </svg>
           <input type="search" required placeholder="Search" />
         </label>
-        <a className="btn bg-[#442c05] text-white">Login</a>
+        <a className="btn bg-[#43311c] text-white">Login</a>
       </div>
     </div>
   );

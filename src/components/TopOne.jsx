@@ -1,6 +1,6 @@
 export default function TopOne({ lawyer }) {
     return (
-      <div className="lg:col-span-7 bg-[#352514] border border-[#c5a880]/30 p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center justify-between relative overflow-hidden group">
+      <div className="lg:col-span-7 bg-[#43311c] border border-[#c5a880]/30 p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center justify-between relative overflow-hidden group">
         <div className="absolute top-0 left-0 w-full h-0.75 bg-linear-to-r from-[#c5a880] to-transparent"></div>
 
         <div className="w-full md:w-1/2 aspect-4/5 overflow-hidden bg-neutral rounded-none shrink-0">
@@ -32,9 +32,7 @@ export default function TopOne({ lawyer }) {
             <span className="text-xs tracking-wider text-white/50 block mb-1 uppercase">
               Distinction
             </span>
-            <p className="text-sm font-medium text-white">
-              {lawyer.accolade}
-            </p>
+            <p className="text-sm font-medium text-white">{lawyer.accolade}</p>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import FeaturedLawyers from "@/sections/FeaturedLawyers";
+import LegalCategories from "@/sections/LegalCategories";
 import TopLawyers from "@/sections/TopLawyers";
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <>
       <FeaturedLawyers />
       <TopLawyers />
+      <LegalCategories />
     </>
   );
 }
