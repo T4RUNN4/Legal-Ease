@@ -11,9 +11,8 @@
   "dependencies": {
     "@better-auth/mongo-adapter": "^1.6.19",
     "@gravity-ui/icons": "^2.18.0",
-    "@heroui/react": "^3.2.1",
-    "@heroui/styles": "^3.2.1",
     "better-auth": "^1.6.19",
+    "daisyui": "^5.5.23",
     "date-fns": "^4.4.0",
     "mongodb": "^7.3.0",
     "next": "16.2.9",
@@ -22,10 +21,10 @@
     "react-hook-form": "^7.79.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
+    "@tailwindcss/postcss": "^4.3.1",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
-    "tailwindcss": "^4"
+    "tailwindcss": "^4.3.1"
   }
 }
