@@ -1,7 +1,7 @@
 export default function CategoryCard ({ category }) {
     return (
       <div
-        className="group border border-white/10 p-8 flex flex-col justify-between bg-transparent hover:bg-[#fdfbf7] hover:text-[#43311c] transition-all duration-300 relative overflow-hidden"
+        className="group border border-white/10 p-8 flex flex-col justify-between bg-transparent hover:bg-[#fdfbf7] hover:text-[#43311c] hover:scale-105 transition-all duration-300 relative overflow-hidden"
       >
         <div className="absolute top-0 left-0 w-full h-[2px] bg-[#c5a880] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 

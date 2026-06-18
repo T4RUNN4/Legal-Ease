@@ -66,7 +66,12 @@ export default function Navbar() {
           </svg>
           <input type="search" required placeholder="Search" />
         </label>
-        <a className="btn bg-[#43311c] text-white">Login</a>
+        <Link
+          href="/lawyers"
+          className="btn bg-[#43311c] text-[#fdfbf7] hover:bg-[#352514] border-none rounded-none px-5 py-2 min-h-0 h-auto font-medium text-xs tracking-wider shrink-0 uppercase"
+        >
+          Login
+        </Link>
       </div>
     </div>
   );

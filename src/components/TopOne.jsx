@@ -1,6 +1,8 @@
+import Link from "next/link";
+
 export default function TopOne({ lawyer }) {
     return (
-      <div className="lg:col-span-7 bg-[#43311c] border border-[#c5a880]/30 p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center justify-between relative overflow-hidden group">
+      <div className="lg:col-span-7 bg-[#43311c] border border-[#c5a880]/30 p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center justify-between relative overflow-hidden group hover:scale-105 transition-all duration-300">
         <div className="absolute top-0 left-0 w-full h-0.75 bg-linear-to-r from-[#c5a880] to-transparent"></div>
 
         <div className="w-full md:w-1/2 aspect-4/5 overflow-hidden bg-neutral rounded-none shrink-0">
@@ -34,6 +36,13 @@ export default function TopOne({ lawyer }) {
             </span>
             <p className="text-sm font-medium text-white">{lawyer.accolade}</p>
           </div>
+
+          <Link
+            href="/lawyers"
+            className="btn text-[#43311c] hover:bg-gray-300 border-none rounded-none px-5 py-2 min-h-0 h-auto font-medium text-xs tracking-wider shrink-0 uppercase"
+          >
+            Hire Now
+          </Link>
         </div>
       </div>
     );
