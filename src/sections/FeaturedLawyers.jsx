@@ -8,20 +8,17 @@ export default function FeaturedLawyers() {
       role: "Senior Advocate",
       image:
         "https://i.pinimg.com/736x/ab/57/ca/ab57cadd895944460c54e562c50d352e.jpg",
-      isActive: true,
     },
     {
       name: "Olivia Bennett",
       role: "Legal Advisor",
       image:
         "https://images.squarespace-cdn.com/content/v1/55ffbe15e4b04e8914439ca4/1444170778540-96E0LERKFV69WER58J6T/image-asset.jpeg?format=2500w",
-      isActive: false,
     },
     {
       name: "Daniel Carter",
       role: "Associate Lawyer",
       image: "https://justatic.com/profile-images/1485258-1540835498-s.jpg",
-      isActive: false,
     },
   ];
 
