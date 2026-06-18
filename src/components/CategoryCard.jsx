@@ -7,12 +7,12 @@ export default function CategoryCard ({ category }) {
 
         <div>
           <div className="flex justify-between items-center">
-            <span className="text-xs font-mono tracking-widest text-[#c5a880] group-hover:text-[#43311c]/60 transition-colors duration-300">
+            <span className="text-xs tracking-widest text-[#c5a880] group-hover:text-[#43311c]/60 transition-colors duration-300">
               [{category.code}]
             </span>
             <div className="w-1.5 h-1.5 bg-[#c5a880] group-hover:bg-[#43311c]"></div>
           </div>
-          <h3 className="text-2xl font-serif font-medium">
+          <h3 className="text-2xl font-medium">
             {category.title}
           </h3>
         </div>

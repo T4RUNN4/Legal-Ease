@@ -102,13 +102,13 @@ export default function Lawyers() {
     ];
 
     return (
-      <section className="py-24 px-6 md:px-12 lg:px-24 bg-[#43311c] font-sans text-[#fdfbf7]">
+      <section className="py-24 px-6 md:px-12 lg:px-24 bg-[#43311c] text-[#fdfbf7]">
         <div className="max-w-7xl mx-auto">
           <div className="mb-16 max-w-2xl">
             <span className="text-sm tracking-widest text-[#c5a880] font-medium mb-3 block uppercase">
               // Browse Lawyers
             </span>
-            <h2 className="text-4xl md:text-5xl font-serif font-medium leading-tight">
+            <h2 className="text-4xl md:text-5xl font-medium leading-tight">
                 Explore Our Diverse List Of Legal Experts Across All Practice Areas
             </h2>
           </div>

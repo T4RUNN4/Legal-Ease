@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       data-theme="light"
-      className="font-sans h-full antialiased bg-[#f8f4e9] text-[#43311c]"
+      className="font-serif h-full antialiased bg-[#f8f4e9] text-[#43311c]"
     >
       <body className="min-h-full flex flex-col">
         <Navbar />

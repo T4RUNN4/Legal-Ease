@@ -36,7 +36,7 @@ export default function LegalCategories () {
   ];
 
   return (
-    <section className="bg-[#43311c] py-24 px-6 md:px-12 lg:px-24 font-sans text-[#fdfbf7]">
+    <section className="bg-[#43311c] py-24 px-6 md:px-12 lg:px-24 text-[#fdfbf7]">
       <div className="max-w-7xl mx-auto">
         
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-16 border-b border-white/10 pb-8">

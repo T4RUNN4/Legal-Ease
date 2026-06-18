@@ -18,14 +18,14 @@ export default function TopOne({ lawyer }) {
             <div className="badge badge-outline border-[#c5a880] text-[#c5a880] rounded-none px-3 py-2 text-xs font-semibold tracking-wider uppercase mb-4">
               Best Lawyer of the Year 2026
             </div>
-            <h3 className="text-2xl md:text-3xl font-serif font-medium mb-1 text-white">
+            <h3 className="text-2xl md:text-3xl font-medium mb-1 text-white">
               {lawyer.name}
             </h3>
             <p className="text-[#c5a880] text-sm font-medium tracking-wide mb-4">
               {lawyer.role}
             </p>
 
-            <p className="text-sm italic text-[#c7bca9] leading-relaxed mb-6 font-serif">
+            <p className="text-sm italic text-[#c7bca9] leading-relaxed mb-6">
               {lawyer.quote}
             </p>
           </div>

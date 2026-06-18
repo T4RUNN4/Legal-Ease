@@ -49,7 +49,7 @@ export default function Hero() {
               </span>
             </div>
             
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-[#fdfbf7] leading-tight mb-8">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl text-[#fdfbf7] leading-tight mb-8">
               Find & Hire <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#fdfbf7] to-[#c5a880]">
                 Expert Legal Counsel
