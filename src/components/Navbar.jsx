@@ -67,7 +67,7 @@ export default function Navbar() {
           <input type="search" required placeholder="Search" />
         </label>
         <Link
-          href="/lawyers"
+          href="/login"
           className="btn bg-[#43311c] text-[#fdfbf7] hover:bg-[#352514] border-none rounded-none px-5 py-2 min-h-0 h-auto font-medium text-xs tracking-wider shrink-0 uppercase"
         >
           Login
