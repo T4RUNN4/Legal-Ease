@@ -1,19 +1,38 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 export default function UpdateLegalProfile() {
   const { data: session } = authClient.useSession();
   const userId = session?.user?.id;
+  const [lawyer, setLawyer] = useState(null);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
+    reset,
   } = useForm();
+
+  useEffect(() => {
+    const fetchLawyer = async () => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/lawyers/${userId}`,
+      );
+
+      const data = await res.json();
+      setLawyer(data);
+      reset(data);
+    };
+
+    if (userId) {
+      fetchLawyer();
+    }
+  }, [userId, reset]);
 
   const name = watch("name");
   const fee = watch("fee");
