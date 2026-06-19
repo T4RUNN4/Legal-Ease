@@ -14,14 +14,13 @@ export default function Hero() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-    }, 6000); // Changes slide every 6 seconds
+    }, 6000);
 
     return () => clearInterval(timer);
   }, [slides.length]);
 
   return (
-    <section className="relative w-full h-[90vh] min-h-[600px] overflow-hidden bg-[#2a1f12]">
-      
+    <section className="relative w-full h-[90vh] min-h-150 overflow-hidden bg-[#2a1f12]">
       {slides.map((slide, index) => (
         <div
           key={index}
@@ -34,7 +33,7 @@ export default function Hero() {
             alt={`Hero background ${index + 1}`}
             className="w-full h-full object-cover scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#43311c]/95 via-[#43311c]/60 to-transparent"></div>
+          <div className="absolute inset-0 bg-linear-to-r from-[#43311c]/95 via-[#43311c]/60 to-transparent"></div>
         </div>
       ))}
 
@@ -43,7 +42,7 @@ export default function Hero() {
           <div className="max-w-2xl">
             
             <div className="flex items-center gap-4 mb-6">
-              <span className="w-12 h-[2px] bg-[#c5a880]"></span>
+              <span className="w-12 h-0.5 bg-[#c5a880]"></span>
               <span className="text-sm tracking-widest text-[#c5a880] font-medium uppercase">
                 Premier Legal Representation
               </span>
@@ -51,7 +50,7 @@ export default function Hero() {
             
             <h1 className="text-5xl md:text-6xl lg:text-7xl text-[#fdfbf7] leading-tight mb-8">
               Find & Hire <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#fdfbf7] to-[#c5a880]">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-[#fdfbf7] to-[#c5a880]">
                 Expert Legal Counsel
               </span>
             </h1>

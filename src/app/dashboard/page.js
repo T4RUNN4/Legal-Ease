@@ -2,6 +2,7 @@
 
 import { useSession } from "@/lib/auth-client";
 import { format } from "date-fns";
+import Link from "next/link";
 
 export default function Dashboard() {
   const { data: session, isPending } = useSession();
@@ -32,7 +33,7 @@ export default function Dashboard() {
 
         <div className="w-28 h-36 md:w-32 md:h-40 border border-white/10 bg-[#43311c] shrink-0 overflow-hidden rounded-none shadow-md">
           <img
-            src={user.image || "https://i.pinimg.com/736x/ab/57/ca/ab57cadd895944460c54e562c50d352e.jpg"}
+            src={user.image}
             alt={`Portrait of ${user.name}`}
             className="w-full h-full object-cover hover:grayscale-0 transition-all duration-300 scale-100 hover:scale-105"
           />
@@ -59,8 +60,13 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-
       </div>
+
+      {user && user.role === "lawyer" && 
+        <div className="bg-yellow-300 text-black p-4 mt-4">
+          Complete your <Link href="/dashboard/lawyer/legal-profile">Legal Profile</Link> to appear in the Lawyer List
+        </div>
+      }
     </div>
   );
 }
