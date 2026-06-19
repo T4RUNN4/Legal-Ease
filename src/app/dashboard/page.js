@@ -1,6 +1,7 @@
 "use client";
 
 import { useSession } from "@/lib/auth-client";
+import { format } from "date-fns";
 
 export default function Dashboard() {
   const { data: session, isPending } = useSession();
@@ -15,17 +16,7 @@ export default function Dashboard() {
     );
   }
 
-  if (!user) {
-    return (
-      <div className="max-w-3xl mx-auto mt-6 text-center border border-white/10 bg-[#352514] py-12 rounded-none">
-        <p className="text-sm text-[#c7bca9] ">[ Secure Session Error: Authorization Required ]</p>
-      </div>
-    );
-  }
-
-  const registrationDate = user.createdAt 
-    ? new Date(user.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })
-    : "April 15, 2026";
+  const registrationDate = format(new Date(user.createdAt), 'PPPP');
 
   return (
     <div className="max-w-3xl mx-auto mt-6 w-full">
