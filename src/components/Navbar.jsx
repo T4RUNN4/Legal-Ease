@@ -78,105 +78,116 @@ export default function Navbar() {
                 Dashboard
               </Link>
               <ul className="p-2">
-                <li>
-                  <Link
-                    href="/dashboard/user/hiring-history"
-                    className={
-                      pathname === "/dashboard/user/hiring-history"
-                        ? "underline underline-offset-4"
-                        : ""
-                    }
-                  >
-                    Hiring History
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/dashboard/user/update-profile"
-                    className={
-                      pathname === "/dashboard/user/update-profile"
-                        ? "underline underline-offset-4"
-                        : ""
-                    }
-                  >
-                    Update Profile
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/dashboard/user/comments"
-                    className={
-                      pathname === "/dashboard/user/comments"
-                        ? "underline underline-offset-4"
-                        : ""
-                    }
-                  >
-                    Comments
-                  </Link>
-                </li>
+                {user && user.role === "client" && (
+                  <>
+                    <li>
+                      <Link
+                        href="/dashboard/user/hiring-history"
+                        className={
+                          pathname === "/dashboard/user/hiring-history"
+                            ? "underline underline-offset-4"
+                            : ""
+                        }
+                      >
+                        Hiring History
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/dashboard/user/update-profile"
+                        className={
+                          pathname === "/dashboard/user/update-profile"
+                            ? "underline underline-offset-4"
+                            : ""
+                        }
+                      >
+                        Update Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/dashboard/user/comments"
+                        className={
+                          pathname === "/dashboard/user/comments"
+                            ? "underline underline-offset-4"
+                            : ""
+                        }
+                      >
+                        Comments
+                      </Link>
+                    </li>
+                  </>
+                )}
 
-                <li>
-                  <Link
-                    href="/dashboard/lawyer/hiring-history"
-                    className={
-                      pathname === "/dashboard/lawyer/hiring-history"
-                        ? "underline underline-offset-4"
-                        : ""
-                    }
-                  >
-                    Hiring History
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/dashboard/lawyer/legal-profile"
-                    className={
-                      pathname === "/dashboard/lawyer/legal-profile"
-                        ? "underline underline-offset-4"
-                        : ""
-                    }
-                  >
-                    Manage Legal Profile
-                  </Link>
-                </li>
+                {user && user.role === "lawyer" && (
+                  <>
+                    <li>
+                      <Link
+                        href="/dashboard/lawyer/hiring-history"
+                        className={
+                          pathname === "/dashboard/lawyer/hiring-history"
+                            ? "underline underline-offset-4"
+                            : ""
+                        }
+                      >
+                        Hiring History
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/dashboard/lawyer/legal-profile"
+                        className={
+                          pathname === "/dashboard/lawyer/legal-profile"
+                            ? "underline underline-offset-4"
+                            : ""
+                        }
+                      >
+                        Manage Legal Profile
+                      </Link>
+                    </li>
+                  </>
+                )}
 
-                <li className="mt-10">Admin Menu</li>
-                <li>
-                  <Link
-                    href="/dashboard/admin/user-list"
-                    className={
-                      pathname === "/dashboard/admin/user-list"
-                        ? "underline underline-offset-4"
-                        : ""
-                    }
-                  >
-                    Manage Users
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/dashboard/admin/transactions"
-                    className={
-                      pathname === "/dashboard/admin/transactions"
-                        ? "underline underline-offset-4"
-                        : ""
-                    }
-                  >
-                    All Transactions
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/dashboard/admin/analytics"
-                    className={
-                      pathname === "/dashboard/admin/analytics"
-                        ? "underline underline-offset-4"
-                        : ""
-                    }
-                  >
-                    Analytics
-                  </Link>
-                </li>
+                {user && user.role === "admin" && (
+                  <>
+                    <li>
+                      <Link
+                        href="/dashboard/admin/user-list"
+                        className={
+                          pathname === "/dashboard/admin/user-list"
+                            ? "underline underline-offset-4"
+                            : ""
+                        }
+                      >
+                        Manage Users
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/dashboard/admin/transactions"
+                        className={
+                          pathname === "/dashboard/admin/transactions"
+                            ? "underline underline-offset-4"
+                            : ""
+                        }
+                      >
+                        All Transactions
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/dashboard/admin/analytics"
+                        className={
+                          pathname === "/dashboard/admin/analytics"
+                            ? "underline underline-offset-4"
+                            : ""
+                        }
+                      >
+                        Analytics
+                      </Link>
+                    </li>
+                  </>
+                )}
               </ul>
             </li>
           </ul>
@@ -220,104 +231,116 @@ export default function Navbar() {
                 </Link>
               </summary>
               <ul className="p-2 bg-base-100 w-40 z-1">
-                <li>
-                  <Link
-                    href="/dashboard/user/hiring-history"
-                    className={
-                      pathname === "/dashboard/user/hiring-history"
-                        ? "underline underline-offset-4"
-                        : ""
-                    }
-                  >
-                    Hiring History
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/dashboard/user/update-profile"
-                    className={
-                      pathname === "/dashboard/user/update-profile"
-                        ? "underline underline-offset-4"
-                        : ""
-                    }
-                  >
-                    Update Profile
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/dashboard/user/comments"
-                    className={
-                      pathname === "/dashboard/user/comments"
-                        ? "underline underline-offset-4"
-                        : ""
-                    }
-                  >
-                    Comments
-                  </Link>
-                </li>
+                {user && user.role === "client" && (
+                  <>
+                    <li>
+                      <Link
+                        href="/dashboard/user/hiring-history"
+                        className={
+                          pathname === "/dashboard/user/hiring-history"
+                            ? "underline underline-offset-4"
+                            : ""
+                        }
+                      >
+                        Hiring History
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/dashboard/user/update-profile"
+                        className={
+                          pathname === "/dashboard/user/update-profile"
+                            ? "underline underline-offset-4"
+                            : ""
+                        }
+                      >
+                        Update Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/dashboard/user/comments"
+                        className={
+                          pathname === "/dashboard/user/comments"
+                            ? "underline underline-offset-4"
+                            : ""
+                        }
+                      >
+                        Comments
+                      </Link>
+                    </li>
+                  </>
+                )}
 
-                <li>
-                  <Link
-                    href="/dashboard/lawyer/hiring-history"
-                    className={
-                      pathname === "/dashboard/lawyer/hiring-history"
-                        ? "underline underline-offset-4"
-                        : ""
-                    }
-                  >
-                    Hiring History
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/dashboard/lawyer/legal-profile"
-                    className={
-                      pathname === "/dashboard/lawyer/legal-profile"
-                        ? "underline underline-offset-4"
-                        : ""
-                    }
-                  >
-                    Manage Legal Profile
-                  </Link>
-                </li>
+                {user && user.role === "lawyer" && (
+                  <>
+                    <li>
+                      <Link
+                        href="/dashboard/lawyer/hiring-history"
+                        className={
+                          pathname === "/dashboard/lawyer/hiring-history"
+                            ? "underline underline-offset-4"
+                            : ""
+                        }
+                      >
+                        Hiring History
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/dashboard/lawyer/legal-profile"
+                        className={
+                          pathname === "/dashboard/lawyer/legal-profile"
+                            ? "underline underline-offset-4"
+                            : ""
+                        }
+                      >
+                        Manage Legal Profile
+                      </Link>
+                    </li>
+                  </>
+                )}
 
-                <li>
-                  <Link
-                    href="/dashboard/admin/user-list"
-                    className={
-                      pathname === "/dashboard/admin/user-list"
-                        ? "underline underline-offset-4"
-                        : ""
-                    }
-                  >
-                    Manage Users
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/dashboard/admin/transactions"
-                    className={
-                      pathname === "/dashboard/admin/transactions"
-                        ? "underline underline-offset-4"
-                        : ""
-                    }
-                  >
-                    All Transactions
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/dashboard/admin/analytics"
-                    className={
-                      pathname === "/dashboard/admin/analytics"
-                        ? "underline underline-offset-4"
-                        : ""
-                    }
-                  >
-                    Analytics
-                  </Link>
-                </li>
+                {user && user.role === "admin" && (
+                  <>
+                    <li>
+                      <Link
+                        href="/dashboard/admin/user-list"
+                        className={
+                          pathname === "/dashboard/admin/user-list"
+                            ? "underline underline-offset-4"
+                            : ""
+                        }
+                      >
+                        Manage Users
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/dashboard/admin/transactions"
+                        className={
+                          pathname === "/dashboard/admin/transactions"
+                            ? "underline underline-offset-4"
+                            : ""
+                        }
+                      >
+                        All Transactions
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/dashboard/admin/analytics"
+                        className={
+                          pathname === "/dashboard/admin/analytics"
+                            ? "underline underline-offset-4"
+                            : ""
+                        }
+                      >
+                        Analytics
+                      </Link>
+                    </li>
+                  </>
+                )}
               </ul>
             </details>
           </li>
