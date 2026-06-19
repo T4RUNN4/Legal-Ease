@@ -2,20 +2,23 @@
 
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
   const { data: session } = authClient.useSession();
   const router = useRouter();
+
+  const pathname = usePathname();
+  const user = session?.user;
 
   const handleLogout = async () => {
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
           router.push("/login");
-        }
-      }
-    })
+        },
+      },
+    });
   };
 
   return (
@@ -44,54 +47,135 @@ export default function Navbar() {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             <li>
-              <Link href="/" className="underline underline-offset-4">
+              <Link
+                href="/"
+                className={
+                  pathname === "/" ? "underline underline-offset-4" : ""
+                }
+              >
                 Home
               </Link>
             </li>
             <li>
-              <Link href="/lawyers">Browse Lawyers</Link>
+              <Link
+                className={
+                  pathname === "/lawyers" ? "underline underline-offset-4" : ""
+                }
+                href="/lawyers"
+              >
+                Browse Lawyers
+              </Link>
             </li>
             <li>
-              <Link href="/dashboard">Dashboard</Link>
+              <Link
+                href="/dashboard"
+                className={
+                  pathname === "/dashboard"
+                    ? "underline underline-offset-4"
+                    : ""
+                }
+              >
+                Dashboard
+              </Link>
               <ul className="p-2">
-                <li className="mt-10">User Menu</li>
                 <li>
-                  <Link href="/dashboard/user/hiring-history">
+                  <Link
+                    href="/dashboard/user/hiring-history"
+                    className={
+                      pathname === "/dashboard/user/hiring-history"
+                        ? "underline underline-offset-4"
+                        : ""
+                    }
+                  >
                     Hiring History
                   </Link>
                 </li>
                 <li>
-                  <Link href="/dashboard/user/update-profile">
+                  <Link
+                    href="/dashboard/user/update-profile"
+                    className={
+                      pathname === "/dashboard/user/update-profile"
+                        ? "underline underline-offset-4"
+                        : ""
+                    }
+                  >
                     Update Profile
                   </Link>
                 </li>
                 <li>
-                  <Link href="/dashboard/user/comments">Comments</Link>
+                  <Link
+                    href="/dashboard/user/comments"
+                    className={
+                      pathname === "/dashboard/user/comments"
+                        ? "underline underline-offset-4"
+                        : ""
+                    }
+                  >
+                    Comments
+                  </Link>
                 </li>
 
-                <li className="mt-10">Lawyer Menu</li>
                 <li>
-                  <Link href="/dashboard/lawyer/hiring-history">
+                  <Link
+                    href="/dashboard/lawyer/hiring-history"
+                    className={
+                      pathname === "/dashboard/lawyer/hiring-history"
+                        ? "underline underline-offset-4"
+                        : ""
+                    }
+                  >
                     Hiring History
                   </Link>
                 </li>
                 <li>
-                  <Link href="/dashboard/lawyer/legal-profile">
+                  <Link
+                    href="/dashboard/lawyer/legal-profile"
+                    className={
+                      pathname === "/dashboard/lawyer/legal-profile"
+                        ? "underline underline-offset-4"
+                        : ""
+                    }
+                  >
                     Manage Legal Profile
                   </Link>
                 </li>
 
                 <li className="mt-10">Admin Menu</li>
                 <li>
-                  <Link href="/dashboard/admin/user-list">Manage Users</Link>
+                  <Link
+                    href="/dashboard/admin/user-list"
+                    className={
+                      pathname === "/dashboard/admin/user-list"
+                        ? "underline underline-offset-4"
+                        : ""
+                    }
+                  >
+                    Manage Users
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/dashboard/admin/transactions">
+                  <Link
+                    href="/dashboard/admin/transactions"
+                    className={
+                      pathname === "/dashboard/admin/transactions"
+                        ? "underline underline-offset-4"
+                        : ""
+                    }
+                  >
                     All Transactions
                   </Link>
                 </li>
                 <li>
-                  <Link href="/dashboard/admin/analytics">Analytics</Link>
+                  <Link
+                    href="/dashboard/admin/analytics"
+                    className={
+                      pathname === "/dashboard/admin/analytics"
+                        ? "underline underline-offset-4"
+                        : ""
+                    }
+                  >
+                    Analytics
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -104,54 +188,135 @@ export default function Navbar() {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 flex gap-6">
           <li>
-            <Link href="/" className="underline underline-offset-4">
+            <Link
+              href="/"
+              className={pathname === "/" ? "underline underline-offset-4" : ""}
+            >
               Home
             </Link>
           </li>
           <li>
-            <Link href="/lawyers">Browse Lawyers</Link>
+            <Link
+              href="/lawyers"
+              className={
+                pathname === "/lawyers" ? "underline underline-offset-4" : ""
+              }
+            >
+              Browse Lawyers
+            </Link>
           </li>
           <li>
             <details>
               <summary>
-                <Link href="/dashboard">Dashboard</Link>
+                <Link
+                  href="/dashboard"
+                  className={
+                    pathname === "/dashboard"
+                      ? "underline underline-offset-4"
+                      : ""
+                  }
+                >
+                  Dashboard
+                </Link>
               </summary>
               <ul className="p-2 bg-base-100 w-40 z-1">
                 <li>
-                  <Link href="/dashboard/user/hiring-history">
+                  <Link
+                    href="/dashboard/user/hiring-history"
+                    className={
+                      pathname === "/dashboard/user/hiring-history"
+                        ? "underline underline-offset-4"
+                        : ""
+                    }
+                  >
                     Hiring History
                   </Link>
                 </li>
                 <li>
-                  <Link href="/dashboard/user/update-profile">
+                  <Link
+                    href="/dashboard/user/update-profile"
+                    className={
+                      pathname === "/dashboard/user/update-profile"
+                        ? "underline underline-offset-4"
+                        : ""
+                    }
+                  >
                     Update Profile
                   </Link>
                 </li>
                 <li>
-                  <Link href="/dashboard/user/comments">Comments</Link>
+                  <Link
+                    href="/dashboard/user/comments"
+                    className={
+                      pathname === "/dashboard/user/comments"
+                        ? "underline underline-offset-4"
+                        : ""
+                    }
+                  >
+                    Comments
+                  </Link>
                 </li>
 
                 <li>
-                  <Link href="/dashboard/lawyer/hiring-history">
+                  <Link
+                    href="/dashboard/lawyer/hiring-history"
+                    className={
+                      pathname === "/dashboard/lawyer/hiring-history"
+                        ? "underline underline-offset-4"
+                        : ""
+                    }
+                  >
                     Hiring History
                   </Link>
                 </li>
                 <li>
-                  <Link href="/dashboard/lawyer/legal-profile">
+                  <Link
+                    href="/dashboard/lawyer/legal-profile"
+                    className={
+                      pathname === "/dashboard/lawyer/legal-profile"
+                        ? "underline underline-offset-4"
+                        : ""
+                    }
+                  >
                     Manage Legal Profile
                   </Link>
                 </li>
 
                 <li>
-                  <Link href="/dashboard/admin/user-list">Manage Users</Link>
+                  <Link
+                    href="/dashboard/admin/user-list"
+                    className={
+                      pathname === "/dashboard/admin/user-list"
+                        ? "underline underline-offset-4"
+                        : ""
+                    }
+                  >
+                    Manage Users
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/dashboard/admin/transactions">
+                  <Link
+                    href="/dashboard/admin/transactions"
+                    className={
+                      pathname === "/dashboard/admin/transactions"
+                        ? "underline underline-offset-4"
+                        : ""
+                    }
+                  >
                     All Transactions
                   </Link>
                 </li>
                 <li>
-                  <Link href="/dashboard/admin/analytics">Analytics</Link>
+                  <Link
+                    href="/dashboard/admin/analytics"
+                    className={
+                      pathname === "/dashboard/admin/analytics"
+                        ? "underline underline-offset-4"
+                        : ""
+                    }
+                  >
+                    Analytics
+                  </Link>
                 </li>
               </ul>
             </details>
@@ -179,7 +344,8 @@ export default function Navbar() {
           <input type="search" required placeholder="Search" />
         </label>
         {session ? (
-          <button onClick={handleLogout}
+          <button
+            onClick={handleLogout}
             className="btn btn-error rounded-none px-5 py-2 min-h-0 h-auto tracking-wider shrink-0 uppercase text-white font-bold"
           >
             Logout
