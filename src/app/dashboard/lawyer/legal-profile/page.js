@@ -1,103 +1,188 @@
+"use client";
+
+import { authClient } from "@/lib/auth-client";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+
 export default function UpdateLegalProfile() {
-    const lawyer = {
-    name: "Alexander Reed",
-    photo:
-      "https://i.pinimg.com/736x/ab/57/ca/ab57cadd895944460c54e562c50d352e.jpg",
-    specialization: "Senior Advocate — Criminal Defense & White Collar Crime",
-    consultationFee: 350,
-    summary:
-      "His practice focuses on defending individuals and corporate entities against allegations of financial fraud, cybercrime, and regulatory violations. Alexander is recognized for his meticulous case preparation, aggressive defense tactics, and unwavering commitment to safeguarding his clients' constitutional rights at every tier of the judicial system.",
+  const { data: session } = authClient.useSession();
+  const userId = session?.user?.id;
+  const [lawyer, setLawyer] = useState(null);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  useEffect(() => {
+    const fetchLawyer = async () => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/lawyers/${userId}`,
+      );
+
+      const data = await res.json();
+      setLawyer(data);
+      reset(data);
     };
 
+    if (userId) {
+      fetchLawyer();
+    }
+  }, [userId, reset]);
+
+  const onSubmit = async (data) => {
+    const formattedData = {
+      ...data,
+      user: userId,
+      status: "available",
+      gotHired: 0
+    }
+
+     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/lawyers/update-profile`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formattedData),
+    });
+
+    if(res) {
+      toast.success("Your Legal Profile Updated Successfully");
+    } else {
+      toast.error("Something went wrong!");
+    }
+  };
+
   return (
-    <section className="lg:col-span-4 p-6 md:p-8 space-y-6">
-      <div>
-        <h2 className="text-4xl font-medium text-center">
+    <section className="w-full max-w-3xl mx-auto mt-6 bg-[#352514] border border-white/10 p-6 md:p-10 relative rounded-none">
+      <div className="absolute top-0 left-0 w-full h-0.5 bg-linear-to-r from-[#c5a880] via-[#c5a880]/30 to-transparent"></div>
+      <div className="mb-8 border-b border-white/5 pb-6">
+        <h2 className="text-2xl md:text-3xl font-medium text-[#fdfbf7]">
           Update Legal Profile
         </h2>
       </div>
 
-      <form className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="form-control w-full">
           <label className="label py-1">
-            <span className="label-text uppercase tracking-wider">
+            <span className="label-text  uppercase text-[#c7bca9] tracking-wider">
               Legal Name
             </span>
           </label>
           <input
             type="text"
-            value={lawyer.name}
-            className="input w-full border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none h-11"
+            className="input w-full bg-[#43311c]/40 border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none text-sm text-[#fdfbf7] h-11"
             placeholder="Enter legal name"
-            required
+            {...register("name", { required: true })}
           />
         </div>
+        {errors.name && (
+          <span className="text-xs text-rose-400 mt-1 block">
+            Name is required
+          </span>
+        )}
 
         <div className="form-control w-full">
           <label className="label py-1">
-            <span className="label-text uppercase tracking-wider">
+            <span className="label-text  uppercase text-[#c7bca9] tracking-wider">
               Professional Photo URL
             </span>
           </label>
           <input
             type="text"
-            value={lawyer.photo}
-            className="input w-full border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none h-11 "
-            required
+            className="input w-full bg-[#43311c]/40 border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none text-sm text-[#fdfbf7] h-11"
+            placeholder="https://example.com/portrait.jpg"
+            {...register("photo", { required: true })}
           />
+          {errors.photo && (
+            <span className="text-xs text-rose-400 mt-1 block">
+              Photo URL is required
+            </span>
+          )}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="form-control w-full">
+            <label className="label py-1">
+              <span className="label-text uppercase text-[#c7bca9] tracking-wider">
+                Core Specialization
+              </span>
+            </label>
+            <select
+              className="select w-full bg-[#43311c]/40 border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none text-sm text-[#fdfbf7] h-11 min-h-0 px-4"
+              {...register("specialization", { required: true })}
+            >
+              <option value="" disabled>
+                Select your specialization
+              </option>
+              <option value="Criminal Defense">Criminal Defense</option>
+              <option value="Corporate & Business">Corporate & Business</option>
+              <option value="Family & Matrimonial">Family & Matrimonial</option>
+              <option value="Real Estate & Property">
+                Real Estate & Property
+              </option>
+              <option value="Employment & Labour">Employment & Labour</option>
+            </select>
+
+            {errors.specialization && (
+              <span className="text-xs text-rose-400 mt-1 block">
+                Specialization is required
+              </span>
+            )}
+          </div>
+
+          <div className="form-control w-full">
+            <label className="label py-1">
+              <span className="label-text  uppercase text-[#c7bca9] tracking-wider">
+                Consultation Fee (USD / Hour)
+              </span>
+            </label>
+            <input
+              type="number"
+              className="input w-full bg-[#43311c]/40 border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none text-sm text-[#fdfbf7] h-11"
+              placeholder="e.g., 350"
+              min="0"
+              {...register("fee", { required: true })}
+            />
+
+            {errors.fee && (
+              <span className="text-xs text-rose-400 mt-1 block">
+                Fee is required
+              </span>
+            )}
+          </div>
         </div>
 
         <div className="form-control w-full">
           <label className="label py-1">
-            <span className="label-text uppercase tracking-wider">
-              Specialization
+            <span className="label-text  uppercase text-[#c7bca9] tracking-wider">
+              Professional Summary / Bio
             </span>
           </label>
-          <input
-            type="text"
-            value={lawyer.specialization}
-            className="input w-full border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none h-11"
-            placeholder="Enter specialization"
-            required
-          />
-        </div>
+          <textarea
+            className="textarea w-full bg-[#43311c]/40 border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none text-sm text-[#fdfbf7] min-h-35 p-4 leading-relaxed resize-none"
+            placeholder="Compose summary detailing courtroom records and regulatory compliance history..."
+            {...register("summary", { required: true })}
+          ></textarea>
 
-        <div className="form-control w-full">
-          <label className="label py-1">
-            <span className="label-text uppercase tracking-wider">
-              Consultation Fee (per hour)
+          {errors.summary && (
+            <span className="text-xs text-rose-400 mt-1 block">
+              Summary is required
             </span>
-          </label>
-          <input
-            type="number"
-            value={lawyer.consultationFee}
-            className="input w-full border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none h-11"
-            placeholder="Enter consultation fee"
-            required
-          />
+          )}
         </div>
 
-        <div className="form-control w-full">
-          <label className="label py-1">
-            <span className="label-text uppercase tracking-wider">
-              Summary / Bio
-            </span>
-          </label>
-          <input
-            type="text"
-            value={lawyer.summary}
-            className="input w-full border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none h-11"
-            placeholder="Enter summary or bio"
-            required
-          />
+        <div className="pt-2">
+          <button
+            type="submit"
+            className="btn bg-[#fdfbf7] text-[#43311c] hover:bg-[#e6e2db] border-none rounded-none px-8 h-12 min-h-0 font-medium tracking-widest uppercase transition-transform hover:-translate-y-0.5"
+          >
+            Save Changes
+          </button>
         </div>
-
-        <button
-          type="submit"
-          className="btn bg-[#43311c] text-[#fdfbf7] hover:bg-[#352514] border-none rounded-none px-5 py-2 min-h-0 h-auto font-medium tracking-wider shrink-0 uppercase"
-        >
-          Update Legal Profile
-        </button>
       </form>
     </section>
   );
