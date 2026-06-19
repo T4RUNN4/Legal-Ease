@@ -61,12 +61,6 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-
-      {user && user.role === "lawyer" && 
-        <div className="bg-yellow-300 text-black p-4 mt-4">
-          Complete your <Link href="/dashboard/lawyer/legal-profile">Legal Profile</Link> to appear in the Lawyer List
-        </div>
-      }
     </div>
   );
 }
