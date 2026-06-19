@@ -1,16 +1,74 @@
+"use client";
+
+import { useSession } from "@/lib/auth-client";
+
 export default function Dashboard() {
-  return (
-    <div className="p-4 text-[#43311c] flex items-center justify-center gap-10 mt-10">
-      <div className="h-100 w-50 rounded-full">
-        <img
-        src="https://i.pinimg.com/736x/ab/57/ca/ab57cadd895944460c54e562c50d352e.jpg"
-        alt="Portrait of Alexander Reed"
-        className="w-full h-full object-cover"
-      />
+  const { data: session, isPending } = useSession();
+  const user = session?.user;
+
+  if (isPending) {
+    return (
+      <div className="animate-pulse max-w-3xl mx-auto mt-6 space-y-4">
+        <div className="h-4 bg-white/10 w-24 rounded-none"></div>
+        <div className="h-40 bg-[#352514] border border-white/10 rounded-none"></div>
       </div>
-      <div className="flex flex-col items-center justify-center gap-4">
-        <h3 className="text-xl font-medium mb-1">Alexander Reed</h3>
-        <p>Joined: 15th April, 2026</p>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="max-w-3xl mx-auto mt-6 text-center border border-white/10 bg-[#352514] py-12 rounded-none">
+        <p className="text-sm text-[#c7bca9] ">[ Secure Session Error: Authorization Required ]</p>
+      </div>
+    );
+  }
+
+  const registrationDate = user.createdAt 
+    ? new Date(user.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })
+    : "April 15, 2026";
+
+  return (
+    <div className="max-w-3xl mx-auto mt-6 w-full">
+      
+      <div className="my-8">
+        <span className="text-4xl tracking-widest text-[#c5a880] uppercase block">
+          Your Profile
+        </span>
+      </div>
+
+      <div className="bg-[#352514] border border-white/10 p-6 md:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-8 relative overflow-hidden rounded-none">
+        <div className="absolute top-0 left-0 w-full h-0.5px bg-linear-to-r from-[#c5a880] via-[#c5a880]/30 to-transparent"></div>
+
+        <div className="w-28 h-36 md:w-32 md:h-40 border border-white/10 bg-[#43311c] shrink-0 overflow-hidden rounded-none shadow-md">
+          <img
+            src={user.image || "https://i.pinimg.com/736x/ab/57/ca/ab57cadd895944460c54e562c50d352e.jpg"}
+            alt={`Portrait of ${user.name}`}
+            className="w-full h-full object-cover hover:grayscale-0 transition-all duration-300 scale-100 hover:scale-105"
+          />
+        </div>
+
+        <div className="flex-1 text-center sm:text-left space-y-4 w-full">
+          <div>
+            <span className="badge bg-[#43311c] border-[#c5a880]/30 text-[#c5a880] tracking-wider uppercase rounded-none px-2.5 py-2.5 mb-3">
+              Role: {user.role || "Client"}
+            </span>
+            
+            <h3 className="text-2xl md:text-3xl font-serif font-medium text-[#fdfbf7] tracking-wide">
+              {user.name || "Identified User"}
+            </h3>
+            
+            <p className="text-sm text-[#c7bca9]  mt-1 opacity-80">
+              {user.email}
+            </p>
+          </div>
+
+          <div className="pt-4 border-t border-white/5 flex flex-wrap justify-center sm:justify-start gap-x-8 gap-y-2 text-[#c7bca9]/60">
+            <div>
+              <span className="text-[#c5a880]  mr-1">Joined: </span> {registrationDate}
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   );
