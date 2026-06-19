@@ -1,6 +1,23 @@
+"use client";
+
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
+  const { data: session } = authClient.useSession();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/login");
+        }
+      }
+    })
+  };
+
   return (
     <div className="navbar shadow-sm px-40 py-4">
       <div className="navbar-start">
@@ -161,12 +178,20 @@ export default function Navbar() {
           </svg>
           <input type="search" required placeholder="Search" />
         </label>
-        <Link
-          href="/login"
-          className="btn bg-[#43311c] text-[#fdfbf7] hover:bg-[#352514] border-none rounded-none px-5 py-2 min-h-0 h-auto font-medium text-xs tracking-wider shrink-0 uppercase"
-        >
-          Login
-        </Link>
+        {session ? (
+          <button onClick={handleLogout}
+            className="btn btn-error rounded-none px-5 py-2 min-h-0 h-auto tracking-wider shrink-0 uppercase text-white font-bold"
+          >
+            Logout
+          </button>
+        ) : (
+          <Link
+            href="/login"
+            className="btn bg-[#43311c] text-[#fdfbf7] hover:bg-[#352514] border-none rounded-none px-5 py-2 min-h-0 h-auto font-medium tracking-wider shrink-0 uppercase"
+          >
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );
