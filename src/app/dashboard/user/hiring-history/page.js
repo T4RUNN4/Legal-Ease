@@ -1,30 +1,32 @@
+"use client";
+import { authClient } from "@/lib/auth-client";
+import { format } from "date-fns";
+import { useEffect, useState } from "react";
+
 export default function UserHiringHistory() {
-  const hiringHistory = [
-    {
-      id: 1,
-      lawyer: "Alexander Reed",
-      specialty: "Criminal Defense",
-      fee: "$350/hr",
-      date: "June 14, 2026",
-      status: "accepted",
-    },
-    {
-      id: 2,
-      lawyer: "Eleanor Vance",
-      specialty: "Managing Partner",
-      fee: "$500/hr",
-      date: "June 18, 2026",
-      status: "pending",
-    },
-    {
-      id: 3,
-      lawyer: "Marcus Sterling",
-      specialty: "Corporate Law",
-      fee: "$400/hr",
-      date: "May 22, 2026",
-      status: "rejected",
-    },
-  ];
+  const { data: session } = authClient.useSession();
+  const userID = session?.user?.id;
+  
+  const [hiring, setHiring] = useState(null);
+
+  useEffect(() => {
+      if (!userID) return;
+  
+      const load = async () => {
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/hiring-history/${userID}`,
+          );
+          const hiringData = await res.json();
+          console.log(hiringData);
+          setHiring(hiringData);
+      };
+  
+      load();
+    }, [userID]);
+  
+    if(!hiring) {
+      return <div>Loading...</div>
+    }
 
   return (
     <section className="space-y-6 mt-10 flex flex-col items-center">
@@ -35,42 +37,34 @@ export default function UserHiringHistory() {
       </div>
 
       <div className="border border-white/10 mt-8 w-full flex items-center justify-center">
-        <table className="table w-full rounded-none text-left">
+        <table className="table w-full rounded-none text-center">
           <thead>
             <tr className="border-b border-white/10 uppercase tracking-wider text-xl">
-              <th className="py-4 px-6 rounded-none font-medium">
-                Advocate
-              </th>
+              <th className="py-4 px-6 rounded-none font-medium">Advocate</th>
               <th className="py-4 px-6 font-medium">Specialization</th>
               <th className="py-4 px-6 font-medium">Retainer Fee</th>
               <th className="py-4 px-6 font-medium">Hiring Date</th>
-              <th className="py-4 px-6 rounded-none font-medium">
-                Status
-              </th>
+              <th className="py-4 px-6 rounded-none font-medium">Status</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/5 text-lg text-center">
-            {hiringHistory.map((row) => (
-              <tr key={row.id} className="hover:bg-white/5 transition-colors">
-                <td className="py-4 px-6 font-medium ">
-                  {row.lawyer}
-                </td>
-                <td className="py-4 px-6">{row.specialty}</td>
-                <td className="py-4 px-6">
-                  {row.fee}
-                </td>
-                <td className="py-4 px-6">{row.date}</td>
+          <tbody className="divide-y divide-white/5 text-lg">
+            {hiring.map((hire) => (
+              <tr key={hire._id} className="hover:bg-white/5 transition-colors">
+                <td className="py-4 px-6 font-medium ">{hire.lawyerName}</td>
+                <td className="py-4 px-6">{hire.specialization}</td>
+                <td className="py-4 px-6">{hire.fee}</td>
+                <td className="py-4 px-6">{format(new Date(hire.hiredAt), "PPPP")}</td>
                 <td className="py-4 px-6 text-right">
                   <span
                     className={`inline-block text-xs uppercase tracking-wider px-3 py-1 rounded-none font-medium text-white ${
-                      row.status === "accepted"
+                      hire.status === "accepted"
                         ? "bg-emerald-950 border border-emerald-800"
-                        : row.status === "rejected"
+                        : hire.status === "rejected"
                           ? "bg-rose-950 border border-rose-900"
-                          : "bg-amber-950 border border-amber-800" // Default: Pending
+                          : "bg-amber-950 border border-amber-800"
                     }`}
                   >
-                    {row.status}
+                    {hire.status}
                   </span>
                 </td>
               </tr>
