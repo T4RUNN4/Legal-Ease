@@ -16,6 +16,7 @@ export default function Register() {
   } = useForm();
 
   const password = watch("password");
+  const role = watch("role");
   const router = useRouter();
 
   const onSubmit = async (data) => {
@@ -36,6 +37,18 @@ export default function Register() {
       router.push("/dashboard");
     }
   };
+
+  const handleGoogleLogin = async () => {
+    if(!role) {
+      toast.error("Select your role first");
+      return;
+    }
+    
+    localStorage.setItem("selectedRole", role);
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
+  }
 
   return (
     <section className="min-h-screen] flex items-center justify-center py-16 px-6 md:px-12 font-sans">
@@ -223,6 +236,7 @@ export default function Register() {
 
           <button
             type="button"
+            onClick={handleGoogleLogin}
             className="btn btn-block bg-transparent border border-white/20 hover:border-white/40 hover:bg-white/5 text-[#fdfbf7] rounded-none h-11 min-h-0 font-medium text-xs tracking-wider uppercase transition-colors"
           >
             Continue With Google

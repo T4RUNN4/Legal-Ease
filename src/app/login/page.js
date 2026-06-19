@@ -30,6 +30,12 @@ export default function Login() {
     }
   };
 
+  const handleGoogleLogin = async () => {
+     await authClient.signIn.social({
+        provider: "google",
+      });
+    }
+
   return (
     <section className="lg:col-span-4 p-6 md:p-8 space-y-6 max-w-xl mx-auto">
       <div>
@@ -86,7 +92,8 @@ export default function Login() {
         </p>
         <p className="text-center text-gray-300 my-4">OR</p>
         <button
-          type="submit"
+          type="button"
+          onClick={handleGoogleLogin}
           className="btn btn-ghost border border-[#43311c] rounded-none px-5 py-2 min-h-0 h-auto font-medium tracking-wider shrink-0 uppercase"
         >
           Continue With Google
