@@ -2,31 +2,10 @@ import BestLawyer from "@/components/BestLawyer";
 import TopOne from "@/components/TopOne";
 import Link from "next/link";
 
-export default function TopLawyer() {
-  const topOne = {
-    name: "Eleanor Vance",
-    role: "Criminal Defense Specialist",
-    accolade: "Highest Acquittal Rate in the State",
-    quote:
-      "“The best legal strategy isn't just about finding loopholes; it's about building an unshakeable foundation of trust and foresight.”",
-    image:
-      "https://static.wixstatic.com/media/7d5b6a_efa8322bc1e6487c9ee3b68791940436~mv2.jpg/v1/fill/w_1050,h_1050,al_c,q_85/lawyer-attorney-headshot-professional.jpg",
-  };
-
-  const bestLawyers = [
-    {
-      name: "Marcus Sterling",
-      role: "Head of Corporate Law",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu9VIHoJd9ldRtuqnQvFzqLGbXT4hLedb7zbukdcp_eKuCWVfgGD9lM3s&s=10",
-    },
-    {
-      name: "Sophia Martinez",
-      role: "Senior Defense Counsel",
-      image:
-        "https://thegallerystudios.com/wp-content/uploads/2023/06/legal-marketing-attorney-headshot-02-791x1024.jpg",
-    },
-  ];
+export default async function TopLawyer() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/lawyers/top`);
+  const lawyers = await res.json();
+  console.log(lawyers)
 
   return (
     <section className="py-24 px-6 md:px-12 lg:px-24">
@@ -41,11 +20,17 @@ export default function TopLawyer() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          <TopOne lawyer={topOne} />
+          {lawyers.map((lawyer, index) => {
+            if (index === 0) {
+              return <TopOne key={index} lawyer={lawyer} />;
+            }
+          })}
           <div className="lg:col-span-5 flex flex-col gap-6">
-            {bestLawyers.map((bestLawyer, index) => (
-              <BestLawyer key={index} lawyer={bestLawyer} />
-            ))}
+            {lawyers.map((lawyer, index) => {
+              if (index !== 0) {
+                return <BestLawyer key={index} lawyer={lawyer} />;
+              }
+            })}
 
             <div className="bg-[#fdfbf7] text-[#43311c] p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-auto">
               <div>
@@ -68,4 +53,4 @@ export default function TopLawyer() {
       </div>
     </section>
   );
-};
+}
