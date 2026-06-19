@@ -14,6 +14,7 @@ export default function UpdateLegalProfile() {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
     reset,
   } = useForm();
 
@@ -33,9 +34,19 @@ export default function UpdateLegalProfile() {
     }
   }, [userId, reset]);
 
-  const onSubmit = async (data) => {
+  const name = watch("name");
+  const fee = watch("fee");
+  const photo = watch("photo");
+  const specialization = watch("specialization");
+  const summary = watch("summary");
+
+  const onSubmit = async () => {
     const formattedData = {
-      ...data,
+      name: name,
+      fee: Number(fee),
+      photo: photo,
+      specialization: specialization,
+      summary: summary,
       user: userId,
       status: "available",
       gotHired: 0
