@@ -1,29 +1,11 @@
 import FeaturedCard from "@/components/FeaturedCard";
 import Link from "next/link";
 
-export default function FeaturedLawyers() {
-  const lawyers = [
-    {
-      name: "Alexander Reed",
-      role: "Senior Advocate",
-      image:
-        "https://i.pinimg.com/736x/ab/57/ca/ab57cadd895944460c54e562c50d352e.jpg",
-        rate: 150,
-    },
-    {
-      name: "Olivia Bennett",
-      role: "Legal Advisor",
-      image:
-        "https://images.squarespace-cdn.com/content/v1/55ffbe15e4b04e8914439ca4/1444170778540-96E0LERKFV69WER58J6T/image-asset.jpeg?format=2500w",
-        rate: 120,
-    },
-    {
-      name: "Daniel Carter",
-      role: "Associate Lawyer",
-      image: "https://justatic.com/profile-images/1485258-1540835498-s.jpg",
-      rate: 100,
-    },
-  ];
+export default async function FeaturedLawyers() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/lawyers/random`,
+  );
+  const lawyers = await res.json();
 
   return (
     <section className="bg-[#43311c] py-20 px-6 md:px-12 lg:px-24 text-[#fdfbf7]">
@@ -31,7 +13,7 @@ export default function FeaturedLawyers() {
         <div className="flex flex-col lg:flex-row justify-between items-start gap-10 mb-16">
           <div className="max-w-xl">
             <span className="text-sm tracking-widest text-[#d5c7b4] mb-4 block">
-              // Featured Lawyers
+              Featured Lawyers
             </span>
             <h2 className="text-4xl md:text-5xl font-semibold leading-tight">
               Meet The Professionals Delivering Trusted Legal Support
@@ -54,8 +36,8 @@ export default function FeaturedLawyers() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {lawyers.map((lawyer, index) => (
-            <FeaturedCard key={index} lawyer={lawyer} />
+          {lawyers.map((lawyer) => (
+            <FeaturedCard key={lawyer._id} lawyer={lawyer} />
           ))}
         </div>
       </div>
