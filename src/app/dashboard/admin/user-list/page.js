@@ -1,9 +1,36 @@
-export default async function UserList() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/users`);
-  const users = await res.json();
+"use client"
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+
+export default function UserList() {
+  const [users, setUsers] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/users`);
+      const users = await res.json();
+      setUsers(users);
+    }
+
+    fetchData();
+  }, [])
 
   if(!users) {
     return <div>Loading...</div>
+  }
+
+  const handleDelete = async (id) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/users/delete/${id}`, {
+      method: "DELETE",
+    });
+    const data = await res.json();
+
+    if(data) {
+      toast.success("User Deleted Successfully");
+      router.refresh();
+    } else {
+      console.log(data);
+    }
   }
 
   return (
@@ -24,7 +51,7 @@ export default async function UserList() {
           </thead>
           <tbody className="divide-y divide-white/5 text-lg">
             {users.map((user) => (
-              <tr key={user.id} className="hover:bg-white/5 transition-colors">
+              <tr key={user._id} className="hover:bg-white/5 transition-colors">
                 <td className="py-4 px-6 font-medium">{user.name}</td>
                 <td className="py-4 px-6">{user.email}</td>
                 <td className="py-4 px-6">{user.role}</td>
@@ -32,7 +59,7 @@ export default async function UserList() {
                   <button className="btn inline-block text-xs uppercase tracking-wider px-3 py-1 rounded-none font-medium bg-emerald-950 text-white border border-emerald-800">
                     Change Role
                   </button>
-                  <button className="btn inline-block text-xs uppercase tracking-wider px-3 py-1 rounded-none font-medium bg-rose-950 text-white border border-rose-900">
+                  <button onClick={() => handleDelete(user._id)} className="btn inline-block text-xs uppercase tracking-wider px-3 py-1 rounded-none font-medium bg-rose-950 text-white border border-rose-900">
                     Delete
                   </button>
                 </td>
