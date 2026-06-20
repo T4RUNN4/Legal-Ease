@@ -102,16 +102,28 @@ export default function LawyerDetails() {
                   </span>
                 </span>
               </div>
+              <div className="flex justify-between items-baseline">
+                <span className="text-xs tracking-wider text-[#c7bca9] uppercase">
+                  Date Joined
+                </span>
+              </div>
             </div>
 
-            <button
-              onClick={() =>
-                document.getElementById("hiring_confirmation").showModal()
-              }
-              className="btn w-full bg-[#fdfbf7] text-[#43311c] hover:bg-[#e6e2db] border-none rounded-none py-4 min-h-0 h-auto font-medium text-sm tracking-widest uppercase transition-transform hover:-translate-y-0.5"
-            >
-              Hire {lawyer.name.split(" ")[0]}
-            </button>
+            {session && (
+              <>
+                <button
+                  onClick={() =>
+                    document.getElementById("hiring_confirmation").showModal()
+                  }
+                  className="btn w-full bg-[#fdfbf7] text-[#43311c] hover:bg-[#e6e2db] border-none rounded-none py-4 min-h-0 h-auto font-medium text-sm tracking-widest uppercase transition-transform hover:-translate-y-0.5"
+                >
+                  Hire {lawyer.name.split(" ")[0]}
+                </button>
+                <button className="btn btn-ghost w-full border border-solid border-white/10 rounded-none py-4 min-h-0 h-auto font-medium text-sm tracking-widest uppercase transition-transform hover:-translate-y-0.5 mt-2">
+                  Comment
+                </button>
+              </>
+            )}
 
             <p className="text-[11px] text-center text-[#c7bca9]/60 mt-3">
               * Initial conflict checking procedures apply prior to final

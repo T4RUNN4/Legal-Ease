@@ -17,11 +17,10 @@ export default function Dashboard() {
     );
   }
 
-  const registrationDate = format(new Date(user.createdAt), 'PPPP');
+  const registrationDate = format(new Date(user.createdAt), "PPPP");
 
   return (
     <div className="max-w-3xl mx-auto mt-6 w-full">
-      
       <div className="my-8">
         <span className="text-4xl tracking-widest text-[#c5a880] uppercase block">
           Your Profile
@@ -44,11 +43,11 @@ export default function Dashboard() {
             <span className="badge bg-[#43311c] border-[#c5a880]/30 text-[#c5a880] tracking-wider uppercase rounded-none px-2.5 py-2.5 mb-3">
               Role: {user.role || "Client"}
             </span>
-            
+
             <h3 className="text-2xl md:text-3xl font-serif font-medium text-[#fdfbf7] tracking-wide">
               {user.name || "Identified User"}
             </h3>
-            
+
             <p className="text-sm text-[#c7bca9]  mt-1 opacity-80">
               {user.email}
             </p>
@@ -56,11 +55,21 @@ export default function Dashboard() {
 
           <div className="pt-4 border-t border-white/5 flex flex-wrap justify-center sm:justify-start gap-x-8 gap-y-2 text-[#c7bca9]/60">
             <div>
-              <span className="text-[#c5a880]  mr-1">Joined: </span> {registrationDate}
+              <span className="text-[#c5a880]  mr-1">Joined: </span>{" "}
+              {registrationDate}
             </div>
           </div>
         </div>
       </div>
+
+      {user.role === "client" && (
+        <Link
+          href="/dashboard/user/update-profile"
+          className="btn w-full bg-[#5e4528] text-white border-none rounded-none py-4 min-h-0 h-auto font-medium text-sm tracking-widest uppercase transition-transform hover:-translate-y-0.5 mt-4"
+        >
+          Update Profile
+        </Link>
+      )}
     </div>
   );
 }
