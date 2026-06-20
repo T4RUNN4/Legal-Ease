@@ -5,7 +5,6 @@ import Link from "next/link";
 export default async function TopLawyer() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/lawyers/top`);
   const lawyers = await res.json();
-  console.log(lawyers)
 
   return (
     <section className="py-24 px-6 md:px-12 lg:px-24">
