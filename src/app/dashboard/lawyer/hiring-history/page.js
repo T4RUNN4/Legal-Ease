@@ -47,7 +47,6 @@ export default function LawyerHiringHistory() {
     );
     const data = await res.json();
     toast.success("Status updated");
-    fetchHirings();
   };
 
   if (!hiring) {
