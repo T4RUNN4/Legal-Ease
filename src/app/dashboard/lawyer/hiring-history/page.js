@@ -2,6 +2,7 @@
 import { authClient } from "@/lib/auth-client";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function LawyerHiringHistory() {
   const { data: session } = authClient.useSession();
@@ -33,8 +34,24 @@ export default function LawyerHiringHistory() {
     load();
   }, [userID]);
 
-  if(!hiring) {
-    return <div>Loading...</div>
+  const updateStatus = async (commentId, status) => {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/hiring/update-status/${commentId}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status }),
+      },
+    );
+    const data = await res.json();
+    toast.success("Status updated");
+    fetchHirings();
+  };
+
+  if (!hiring) {
+    return <div>Loading...</div>;
   }
 
   return (
@@ -64,12 +81,18 @@ export default function LawyerHiringHistory() {
                 <td className="py-4 px-6 flex gap-2">
                   {hire.status === "pending" ? (
                     <>
-                      <span className="inline-block text-sm uppercase tracking-wider px-3 py-1 rounded-none font-medium bg-emerald-950 text-white border border-emerald-800">
+                      <button
+                        onClick={() => updateStatus(hire._id, "unpaid")}
+                        className="btn inline-block text-sm uppercase tracking-wider px-3 py-1 rounded-none font-medium bg-emerald-950 text-white border border-emerald-800"
+                      >
                         Accept
-                      </span>
-                      <span className="inline-block text-sm uppercase tracking-wider px-3 py-1 rounded-none font-medium bg-rose-950 text-white border border-rose-900">
+                      </button>
+                      <button
+                        onClick={() => updateStatus(hire._id, "rejected")}
+                        className="btn inline-block text-sm uppercase tracking-wider px-3 py-1 rounded-none font-medium bg-rose-950 text-white border border-rose-900"
+                      >
                         Reject
-                      </span>
+                      </button>
                     </>
                   ) : (
                     <span className="inline-block text-sm uppercase tracking-wider px-3 py-1 rounded-none font-medium">
