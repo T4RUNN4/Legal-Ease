@@ -20,7 +20,7 @@ export default function Dashboard() {
   const registrationDate = format(new Date(user.createdAt), "PPPP");
 
   return (
-    <div className="max-w-3xl mx-auto mt-6 w-full">
+    <div className="max-w-3xl mx-auto mt-6 w-full px-4 md:px-0">
       <div className="my-8">
         <span className="text-4xl tracking-widest text-[#c5a880] uppercase block">
           Your Profile

@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
 
   return (
     <div className="flex h-screen w-full overflow-hidden">
-      <aside className="w-72 bg-[#352514] border-r border-white/10 flex flex-col justify-between h-full shrink-0">
+      <aside className="hidden lg:w-64 bg-[#352514] border-r border-white/10 lg:flex flex-col justify-between h-full shrink-0">
         <div className="p-6">
 
           <div className="mt-10 mb-8 pb-6 border-b border-white/10">

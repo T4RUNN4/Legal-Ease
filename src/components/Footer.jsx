@@ -96,7 +96,7 @@ export default function Footer() {
               corporate governance regulations and Supreme Court updates.
             </p>
 
-            <div className="navbar-end flex flex-row gap-4">
+            <div className="navbar-end flex flex-col gap-4">
               <label className="input">
                 <input type="email" required placeholder="Your Email" />
               </label>

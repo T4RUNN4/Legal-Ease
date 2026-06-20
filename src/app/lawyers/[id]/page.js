@@ -60,8 +60,8 @@ export default function LawyerDetails() {
   return (
     <main className="min-h-screen bg-[#43311c] text-[#fdfbf7] py-20 px-6 md:px-12 lg:px-24 selection:bg-[#c5a880] selection:text-[#43311c]">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          <div className="lg:col-span-5 bg-[#352514] border border-white/10 p-6 md:p-8 sticky top-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 items-start">
+          <div className="lg:col-span-5 bg-[#352514] border border-white/10 p-6 md:p-8 md:sticky top-6">
             <div className="w-full aspect-4/5 bg-neutral relative overflow-hidden mb-6">
               <img
                 src={lawyer.photo}
@@ -131,7 +131,7 @@ export default function LawyerDetails() {
             </p>
           </div>
 
-          <div className="lg:col-span-7 space-y-8 flex flex-col ">
+          <div className="lg:col-span-7 space-y-8 flex flex-col">
             <div>
               <span className="text-sm tracking-widest text-[#c5a880] font-medium mb-2 block uppercase">
                 {lawyer.specialization}

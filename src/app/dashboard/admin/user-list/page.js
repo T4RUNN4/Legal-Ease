@@ -62,20 +62,20 @@ export default function UserList() {
       <div className="border border-white/10 mt-8 w-full">
         <table className="table w-full rounded-none text-center">
           <thead>
-            <tr className="border-b border-white/10 uppercase tracking-wider text-xl">
-              <th className="py-4 px-6 rounded-none font-medium">Name</th>
-              <th className="py-4 px-6 font-medium">Email</th>
-              <th className="py-4 px-6 font-medium">Role</th>
-              <th className="py-4 px-6 font-medium">Action</th>
+            <tr className="border-b border-white/10 uppercase tracking-wider text-lg md:text-xl">
+              <th className="py-4 px-4 md:px-6 rounded-none font-medium">Name</th>
+              <th className="py-4 px-4 md:px-6 font-medium">Email</th>
+              <th className="py-4 px-4 md:px-6 font-medium">Role</th>
+              <th className="py-4 px-4 md:px-6 font-medium">Action</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/5 text-lg">
+          <tbody className="divide-y divide-white/5 md:text-lg">
             {users.map((user) => (
               <tr key={user._id} className="hover:bg-white/5 transition-colors">
-                <td className="py-4 px-6 font-medium">{user.name}</td>
-                <td className="py-4 px-6">{user.email}</td>
-                <td className="py-4 px-6">{user.role}</td>
-                <td className="py-4 px-6 flex items-center justify-center gap-2">
+                <td className="py-4 px-4 md:px-6 font-medium">{user.name}</td>
+                <td className="py-4 px-4 md:px-6">{user.email}</td>
+                <td className="py-4 px-4 md:px-6">{user.role}</td>
+                <td className="py-4 px-4 md:px-6 flex flex-col md:flex-row items-center justify-center gap-2">
                   <button onClick={() => handleRoleChange(user.role, user._id)} className="btn inline-block text-xs uppercase tracking-wider px-3 py-1 rounded-none font-medium bg-emerald-950 text-white border border-emerald-800">
                     Change Role
                   </button>
