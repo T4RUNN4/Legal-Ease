@@ -27,7 +27,27 @@ export default function UserList() {
 
     if(data) {
       toast.success("User Deleted Successfully");
-      router.refresh();
+    } else {
+      console.log(data);
+    }
+  }
+
+  const handleRoleChange = async (role, id) => {
+    const newRole = role === "client" ? "lawyer" : "client";
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/user/update/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ role: newRole}),
+      }
+    );
+
+    const data = await res.json();
+
+    if(data) {
+      toast.success("User Role Chnged Successfully");
     } else {
       console.log(data);
     }
@@ -56,7 +76,7 @@ export default function UserList() {
                 <td className="py-4 px-6">{user.email}</td>
                 <td className="py-4 px-6">{user.role}</td>
                 <td className="py-4 px-6 flex items-center justify-center gap-2">
-                  <button className="btn inline-block text-xs uppercase tracking-wider px-3 py-1 rounded-none font-medium bg-emerald-950 text-white border border-emerald-800">
+                  <button onClick={() => handleRoleChange(user.role, user._id)} className="btn inline-block text-xs uppercase tracking-wider px-3 py-1 rounded-none font-medium bg-emerald-950 text-white border border-emerald-800">
                     Change Role
                   </button>
                   <button onClick={() => handleDelete(user._id)} className="btn inline-block text-xs uppercase tracking-wider px-3 py-1 rounded-none font-medium bg-rose-950 text-white border border-rose-900">
