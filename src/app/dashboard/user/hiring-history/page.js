@@ -49,15 +49,15 @@ export default function UserHiringHistory() {
       <div className="border border-white/10 mt-8 w-full flex items-center justify-center">
         <table className="table w-full rounded-none text-center">
           <thead>
-            <tr className="border-b border-white/10 uppercase tracking-wider text-xl">
+            <tr className="border-b border-white/10 uppercase tracking-wider text-lg md:text-xl">
               <th className="py-4 px-6 rounded-none font-medium">Advocate</th>
               <th className="py-4 px-6 font-medium">Specialization</th>
-              <th className="py-4 px-6 font-medium">Retainer Fee</th>
+              <th className="py-4 px-6 font-medium">Fee</th>
               <th className="py-4 px-6 font-medium">Hiring Date</th>
               <th className="py-4 px-6 rounded-none font-medium">Status</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/5 text-lg">
+          <tbody className="divide-y divide-white/5 md:text-lg">
             {hiring.map((hire) => (
               <tr key={hire._id} className="hover:bg-white/5 transition-colors">
                 <td className="py-4 px-6 font-medium ">{hire.lawyerName}</td>
