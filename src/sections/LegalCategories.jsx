@@ -5,34 +5,28 @@ export default function LegalCategories () {
     {
       title: "Criminal Defense",
       code: "01",
-      link: "#"
+      link: "Criminal+Defense",
     },
     {
       title: "Corporate & Business",
       code: "02",
-      link: "#"
+      link: "Corporate+%26+Business",
     },
     {
       title: "Family & Matrimonial",
       code: "03",
-      link: "#"
+      link: "Family+%26+Matrimonial",
     },
     {
       title: "Real Estate & Property",
       code: "04",
-      link: "#"
-    },
-    {
-      title: "Intellectual Property",
-      code: "05",
-      link: "#"
+      link: "Real+Estate+%26+Property",
     },
     {
       title: "Employment & Labor",
-      code: "06",
-      description: "Navigating workplace disputes, wage/hour audits, severance negotiations, and regulatory compliance frameworks.",
-      link: "#"
-    }
+      code: "05",
+      link: "Employment+%26+Labour",
+    },
   ];
 
   return (
