@@ -6,7 +6,7 @@ LegalEase is a digital platform that connects legal seekers, clients, and busine
 
 Traditional legal hiring is often limited to law firms or physical consultations. An online marketplace democratizes access to legal aid, enables emerging lawyers to reach global clients, and provides a secure, streamlined hiring experience. The project demonstrates advanced MERN stack concepts, including role-based access, payment integration, and interactive features like comments and analytics.
 
-Live Url:
+Live Url: https://legal-ease-fawn-ten.vercel.app/
 
 ## TECH STACK
 
