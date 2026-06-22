@@ -2,10 +2,9 @@
 
 import FeaturedCard from "@/components/FeaturedCard";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState, Suspense } from "react"; // Added Suspense
+import { useEffect, useState } from "react";
 
-// 1. Rename this to a sub-component
-function LawyersContent() {
+export default function Lawyers() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -145,14 +144,5 @@ function LawyersContent() {
         )}
       </div>
     </section>
-  );
-}
-
-// 2. Export the main default component wrapped in Suspense
-export default function Lawyers() {
-  return (
-    <Suspense fallback={<div className="text-center py-24 text-white">Loading interface...</div>}>
-      <LawyersContent />
-    </Suspense>
   );
 }
