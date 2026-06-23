@@ -2,12 +2,14 @@
 
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
+  
   const pathname = usePathname();
+  const router = useRouter();
 
   const linkStyle = (path) =>
     `uppercase tracking-wider transition-colors duration-200 ${
