@@ -2,6 +2,7 @@
 
 import HyperLinkButton from "@/components/Buttons/HyperLinkButton";
 import Heading from "@/components/Heading";
+import SubHeading from "@/components/SubHeading";
 import { authClient } from "@/lib/auth-client";
 import { useState, useEffect } from "react";
 
@@ -66,16 +67,11 @@ export default function Hero() {
       <div className="absolute inset-0 z-10 flex flex-col justify-center px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl w-full mx-auto">
           <div className="max-w-2xl">
-            <div className="flex items-center gap-4 mb-6">
-              <span className="w-12 h-0.5 bg-[#c5a880]"></span>
-              <span className="text-sm tracking-widest text-[#c5a880] font-medium uppercase">
-                Premier Legal Representation
-              </span>
-            </div>
 
+            <SubHeading text="Premier Legal Representation" />
             <Heading texts={["Find & Hire", "Expert Legal Counsel"]} />
-
             <HyperLinkButton text="Browse Lawyers" link="/lawyers?page=1" />
+
           </div>
         </div>
       </div>
