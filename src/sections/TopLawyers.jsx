@@ -14,7 +14,7 @@ export default async function TopLawyer() {
       <SubHeading text="Top Lawyers" />
       <Heading texts={["Driven By Distinction,", "Proven In Practice"]} />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mt-16">
         {lawyers.map((lawyer, index) => {
           if (index === 0) {
             return <TopOne key={index} lawyer={lawyer} />;

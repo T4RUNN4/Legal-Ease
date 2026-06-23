@@ -19,7 +19,7 @@ export default async function FeaturedLawyers() {
       <SubHeading text="Featured Laweyrs" />
       <Heading texts={["Credentialed Counsel,", "Diverse Expertise"]} />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
         {lawyers.map((lawyer) => (
           <FeaturedCard key={lawyer._id} lawyer={lawyer} />
         ))}
