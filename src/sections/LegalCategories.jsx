@@ -34,8 +34,8 @@ export default function LegalCategories () {
 
   return (
     <SectionStructure>
-        <SubHeading text="Legal Categories" />
-        <Heading texts={["Explore Experts", "In Every Legal Discipline"]} />
+        <SubHeading text="Exprest from every discipline" />
+        <Heading texts={["Legal Categories"]} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
         {categories.map((category, index) => (

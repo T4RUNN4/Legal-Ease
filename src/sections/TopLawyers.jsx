@@ -11,8 +11,8 @@ export default async function TopLawyer() {
 
   return (
     <SectionStructure>
-      <SubHeading text="Top Lawyers" />
-      <Heading texts={["Driven By Distinction,", "Proven In Practice"]} />
+      <SubHeading text="Best Among The All" />
+      <Heading texts={["Most Hired Lawyers"]} />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mt-16">
         {lawyers.map((lawyer, index) => {
