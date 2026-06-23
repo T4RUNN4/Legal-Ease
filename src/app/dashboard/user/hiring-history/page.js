@@ -1,5 +1,11 @@
 "use client";
+
+import Button from "@/components/Button";
+import Heading from "@/components/Heading";
+import SectionStructure from "@/components/SectionStructure";
+import SubHeading from "@/components/SubHeading";
 import { authClient } from "@/lib/auth-client";
+import Table from "@/sections/Table";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 
@@ -17,7 +23,6 @@ export default function UserHiringHistory() {
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/hiring-history/${userID}`,
       );
       const hiringData = await res.json();
-      console.log(hiringData);
       setHiring(hiringData);
     };
 
@@ -39,60 +44,57 @@ export default function UserHiringHistory() {
   };
 
   return (
-    <section className="space-y-6 mt-10 flex flex-col items-center">
-      <div className="flex flex-col gap-2">
-        <h2 className="text-4xl font-medium text-center">
-          Your Legal Retainers
-        </h2>
-      </div>
+    <SectionStructure page="true">
+      <SubHeading text="Hiring History" />
+      <Heading texts={["Lawyers You Hired"]} />
 
-      <div className="border border-white/10 mt-8 w-full flex items-center justify-center">
-        <table className="table w-full rounded-none text-center">
-          <thead>
-            <tr className="border-b border-white/10 uppercase tracking-wider text-lg md:text-xl">
-              <th className="py-4 px-6 rounded-none font-medium">Advocate</th>
-              <th className="py-4 px-6 font-medium">Specialization</th>
-              <th className="py-4 px-6 font-medium">Fee</th>
-              <th className="py-4 px-6 font-medium">Hiring Date</th>
-              <th className="py-4 px-6 rounded-none font-medium">Status</th>
+      <div className="border border-white/10 mt-16 w-full flex items-center justify-center">
+        <Table
+          tableHeads={[
+            "Name",
+            "Specialization",
+            "Fee",
+            "Hiring Date",
+            "Status",
+          ]}
+        >
+          {hiring.map((hire) => (
+            <tr
+              key={hire._id}
+              className="transition-colors even:bg-[#43311c]/10"
+            >
+              <td className="py-4 px-6">{hire.lawyerName}</td>
+              <td className="py-4 px-6">{hire.specialization}</td>
+              <td className="py-4 px-6">${hire.fee}</td>
+              <td className="py-4 px-6">
+                {format(new Date(hire.hiredAt), "PPP")}
+              </td>
+              <td className="py-4 px-6">
+                {hire.status === "unpaid" ? (
+                  <Button
+                    text="Pay"
+                    type="action"
+                    variant="payment"
+                    action={() => handleCheckout(hire._id)}
+                  />
+                ) : (
+                  <span
+                    className={`uppercase tracking-wider rounded-none ${
+                      hire.status === "paid"
+                        ? "text-emerald-600"
+                        : hire.status === "rejected"
+                          ? "text-rose-600"
+                          : "text-gray-400"
+                    }`}
+                  >
+                    {hire.status}
+                  </span>
+                )}
+              </td>
             </tr>
-          </thead>
-          <tbody className="divide-y divide-white/5 md:text-lg">
-            {hiring.map((hire) => (
-              <tr key={hire._id} className="hover:bg-white/5 transition-colors">
-                <td className="py-4 px-6 font-medium ">{hire.lawyerName}</td>
-                <td className="py-4 px-6">{hire.specialization}</td>
-                <td className="py-4 px-6">{hire.fee}</td>
-                <td className="py-4 px-6">
-                  {format(new Date(hire.hiredAt), "PPPP")}
-                </td>
-                <td className="py-4 px-6 text-right">
-                  {hire.status === "unpaid" ? (
-                    <button
-                    onClick={() => handleCheckout(hire._id)}
-                      className="btn inline-block text-sm uppercase tracking-wider px-3 py-1 rounded-none font-medium bg-emerald-950 text-white border border-emerald-800"
-                    >
-                      Pay
-                    </button>
-                  ) : (
-                    <span
-                      className={`inline-block text-xs uppercase tracking-wider px-3 py-1 rounded-none font-medium text-white ${
-                        hire.status === "accepted"
-                          ? "bg-emerald-950 border border-emerald-800"
-                          : hire.status === "rejected"
-                            ? "bg-rose-950 border border-rose-900"
-                            : "bg-amber-950 border border-amber-800"
-                      }`}
-                    >
-                      {hire.status}
-                    </span>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          ))}
+        </Table>
       </div>
-    </section>
+    </SectionStructure>
   );
 }
