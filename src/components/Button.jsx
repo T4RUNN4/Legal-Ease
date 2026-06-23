@@ -15,7 +15,9 @@ export default function Button({
         ? "btn btn-ghost hover:text-black border border-white/10 text-white"
         : variant === "payment"
           ? "border-none bg-emerald-800 text-white hover:bg-emerald-900"
-          : "border-none bg-[#fdfbf7] text-[#43311c] hover:bg-[#e6e2db]"
+          : variant === "delete"
+            ? "border-none bg-rose-800 text-white hover:bg-rose-900"
+            : "border-none bg-[#fdfbf7] text-[#43311c] hover:bg-[#e6e2db]"
   }`;
 
   if (type === "non-action") {

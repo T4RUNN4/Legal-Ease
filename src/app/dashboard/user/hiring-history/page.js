@@ -4,6 +4,7 @@ import Button from "@/components/Button";
 import Heading from "@/components/Heading";
 import SectionStructure from "@/components/SectionStructure";
 import SubHeading from "@/components/SubHeading";
+import TableRow from "@/components/TableRow";
 import { authClient } from "@/lib/auth-client";
 import Table from "@/sections/Table";
 import { format } from "date-fns";
@@ -59,10 +60,7 @@ export default function UserHiringHistory() {
           ]}
         >
           {hiring.map((hire) => (
-            <tr
-              key={hire._id}
-              className="transition-colors even:bg-[#43311c]/10"
-            >
+            <TableRow key={hire._id}>
               <td className="py-4 px-6">{hire.lawyerName}</td>
               <td className="py-4 px-6">{hire.specialization}</td>
               <td className="py-4 px-6">${hire.fee}</td>
@@ -91,7 +89,7 @@ export default function UserHiringHistory() {
                   </span>
                 )}
               </td>
-            </tr>
+            </TableRow>
           ))}
         </Table>
       </div>
