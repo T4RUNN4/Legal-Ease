@@ -1,6 +1,9 @@
 "use client";
 
 import FeaturedCard from "@/components/FeaturedCard";
+import Heading from "@/components/Heading";
+import SectionStructure from "@/components/SectionStructure";
+import SubHeading from "@/components/SubHeading";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -54,95 +57,90 @@ export default function Lawyers() {
   };
 
   return (
-    <section className="py-24 px-6 md:px-12 lg:px-24 bg-[#43311c] text-[#fdfbf7]">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-16 max-w-2xl">
-          <h2 className="text-4xl md:text-5xl font-medium leading-tight">
-            Explore Our Diverse List Of Legal Experts Across All Practice Areas
-          </h2>
-        </div>
+    <SectionStructure>
+      <SubHeading text="Available Lawyers in the Platform" />
+      <Heading texts={["Browse Lawyers"]} />
 
-        <div className="flex mt-8 mb-16 gap-8">
-          <label className="input text-black">
+      <div className="flex my-16 gap-8">
+        <div className="relative flex items-center w-full">
+          <span className="absolute left-3 text-[#c7bca9]/50 pointer-events-none">
             <svg
-              className="h-[1em] opacity-50"
+              className="h-4 w-4"
               xmlns="http://www.w3.org/2000/svg"
+              fill="none"
               viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <g
-                strokeLinejoin="round"
+              <path
                 strokeLinecap="round"
-                strokeWidth="2.5"
-                fill="none"
-                stroke="currentColor"
-              >
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.3-4.3"></path>
-              </g>
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
             </svg>
-            <input
-              type="search"
-              required
-              placeholder="Search lawyers..."
-              defaultValue={search}
-              onChange={(e) => updateQuery({ search: e.target.value, page: 1 })}
-              className="w-full"
-            />
-          </label>
+          </span>
 
-          <select
-            defaultValue={specialization}
-            onChange={(e) =>
-              updateQuery({ specialization: e.target.value, page: 1 })
-            }
-            className="select w-full bg-[#43311c]/40 border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none text-sm text-[#fdfbf7] h-11 min-h-0 px-4"
-          >
-            <option value="">All</option>
-            <option value="Criminal Defense">Criminal Defense</option>
-            <option value="Corporate & Business">Corporate & Business</option>
-            <option value="Family & Matrimonial">Family & Matrimonial</option>
-            <option value="Real Estate & Property">
-              Real Estate & Property
-            </option>
-            <option value="Employment & Labour">Employment & Labour</option>
-          </select>
+          <input
+            type="search"
+            required
+            placeholder="Search lawyers..."
+            defaultValue={search}
+            onChange={(e) => updateQuery({ search: e.target.value, page: 1 })}
+            className="border border-[#43311c]/20 focus:border-[#c5a880] focus:outline-none rounded-none pl-9 pr-4 h-12 w-full transition-colors"
+          />
         </div>
 
-        {data.lawyers.length > 0 ? (
-          <>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-              {data.lawyers.map((lawyer) => (
-                <FeaturedCard key={lawyer._id} lawyer={lawyer} />
-              ))}
-            </div>
-            <div className="flex justify-center gap-4 mt-12">
-              {page > 1 && (
-                <button
-                  onClick={() => router.push(`/lawyers?page=${page - 1}`)}
-                  className="btn btn-ghost"
-                >
-                  Previous
-                </button>
-              )}
-              <span className="mt-2">
-                Page {page} of {data.totalPage}
-              </span>
-              {page < data.totalPage && (
-                <button
-                  onClick={() => router.push(`/lawyers?page=${page + 1}`)}
-                  className="btn btn-ghost"
-                >
-                  Next
-                </button>
-              )}
-            </div>
-          </>
-        ) : (
-          <div className="flex items-center justify-center text-xl">
-            <p>No Lawyers found</p>
-          </div>
-        )}
+        <select
+          defaultValue={specialization}
+          onChange={(e) =>
+            updateQuery({ specialization: e.target.value, page: 1 })
+          }
+          className="bg-[#352514] border border-white/10 shadow-2xl rounded-none text-white px-8"
+        >
+          <option value="">All</option>
+          <option value="Criminal Defense">Criminal Defense</option>
+          <option value="Corporate & Business">Corporate & Business</option>
+          <option value="Family & Matrimonial">Family & Matrimonial</option>
+          <option value="Real Estate & Property">Real Estate & Property</option>
+          <option value="Employment & Labour">Employment & Labour</option>
+        </select>
       </div>
-    </section>
+
+      {data.lawyers.length > 0 ? (
+        <>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {data.lawyers.map((lawyer) => (
+              <FeaturedCard key={lawyer._id} lawyer={lawyer} />
+            ))}
+          </div>
+
+          <div className="flex items-center justify-center font-normal join mt-20">
+            {page > 1 && (
+              <button
+                onClick={() => router.push(`/lawyers?page=${page - 1}`)}
+                className="join-item btn text-lg"
+              >
+                {`<<`}
+              </button>
+            )}
+            <span className="join-item btn btn-ghost text-lg">
+              Page {page} of {data.totalPage}
+            </span>
+            {page < data.totalPage && (
+              <button
+                onClick={() => router.push(`/lawyers?page=${page + 1}`)}
+                className="join-item btn text-lg"
+              >
+                {`>>`}
+              </button>
+            )}
+          </div>
+        </>
+      ) : (
+        <div className="flex items-center justify-center text-xl">
+          <p>No Lawyers found</p>
+        </div>
+      )}
+    </SectionStructure>
   );
 }
