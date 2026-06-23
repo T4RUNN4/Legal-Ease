@@ -1,35 +1,29 @@
 "use client";
 
+import Button from "@/components/Button";
+import Heading from "@/components/Heading";
+import SectionStructure from "@/components/SectionStructure";
+import SubHeading from "@/components/SubHeading";
 import { useSession } from "@/lib/auth-client";
+import DashboardSkeleton from "@/skeleton-loading/S-Dashboard";
 import { format } from "date-fns";
-import Link from "next/link";
 
 export default function Dashboard() {
   const { data: session, isPending } = useSession();
   const user = session?.user;
 
   if (isPending) {
-    return (
-      <div className="animate-pulse max-w-3xl mx-auto mt-6 space-y-4">
-        <div className="h-4 bg-white/10 w-24 rounded-none"></div>
-        <div className="h-40 bg-[#352514] border border-white/10 rounded-none"></div>
-      </div>
-    );
+    return <DashboardSkeleton />;
   }
 
   const registrationDate = format(new Date(user.createdAt), "PPPP");
 
   return (
-    <div className="max-w-3xl mx-auto mt-6 w-full px-4 md:px-0">
-      <div className="my-8">
-        <span className="text-4xl tracking-widest text-[#c5a880] uppercase block">
-          Your Profile
-        </span>
-      </div>
+    <SectionStructure page="true">
+      <SubHeading text="Profile Page" />
+      <Heading texts={["Your Profile Details"]} />
 
-      <div className="bg-[#352514] border border-white/10 p-6 md:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-8 relative overflow-hidden rounded-none">
-        <div className="absolute top-0 left-0 w-full h-0.5px bg-linear-to-r from-[#c5a880] via-[#c5a880]/30 to-transparent"></div>
-
+      <div className="border border-black/10 p-6 md:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-8 relative overflow-hidden rounded-none mt-16">
         <div className="w-28 h-36 md:w-32 md:h-40 border border-white/10 bg-[#43311c] shrink-0 overflow-hidden rounded-none shadow-md">
           <img
             src={user.image}
@@ -41,35 +35,31 @@ export default function Dashboard() {
         <div className="flex-1 text-center sm:text-left space-y-4 w-full">
           <div>
             <span className="badge bg-[#43311c] border-[#c5a880]/30 text-[#c5a880] tracking-wider uppercase rounded-none px-2.5 py-2.5 mb-3">
-              Role: {user.role || "Client"}
+              Role: {user.role}
             </span>
 
-            <h3 className="text-2xl md:text-3xl font-serif font-medium text-[#fdfbf7] tracking-wide">
-              {user.name || "Identified User"}
+            <h3 className="text-2xl md:text-3xl font-serif font-medium tracking-wide">
+              {user.name}
             </h3>
 
-            <p className="text-sm text-[#c7bca9]  mt-1 opacity-80">
-              {user.email}
-            </p>
+            <p className="text-sm mt-1 opacity-80">{user.email}</p>
           </div>
 
-          <div className="pt-4 border-t border-white/5 flex flex-wrap justify-center sm:justify-start gap-x-8 gap-y-2 text-[#c7bca9]/60">
+          <div className="pt-4 border-t border-black/5 flex flex-wrap justify-center sm:justify-start gap-x-8 gap-y-2">
             <div>
-              <span className="text-[#c5a880]  mr-1">Joined: </span>{" "}
-              {registrationDate}
+              <span className="mr-1">Joined: </span> {registrationDate}
             </div>
           </div>
         </div>
-      </div>
 
-      {user.role === "client" && (
-        <Link
-          href="/dashboard/user/update-profile"
-          className="btn w-full bg-[#5e4528] text-white border-none rounded-none py-4 min-h-0 h-auto font-medium text-sm tracking-widest uppercase transition-transform hover:-translate-y-0.5 mt-4"
-        >
-          Update Profile
-        </Link>
-      )}
-    </div>
+        {user.role === "client" && (
+          <Button
+            text="Update Profile"
+            link="/dashboard/user/update-profile"
+            variant="dark"
+          />
+        )}
+      </div>
+    </SectionStructure>
   );
 }
