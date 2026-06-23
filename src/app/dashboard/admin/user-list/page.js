@@ -54,7 +54,7 @@ export default function UserList() {
     const data = await res.json();
 
     if (data) {
-      toast.success("User Role Chnged Successfully");
+      toast.success("User Role Changed Successfully");
       fetchData();
     } else {
       console.log(data);
