@@ -1,57 +1,65 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 export default function UserList() {
   const [users, setUsers] = useState(null);
 
+  const fetchData = async () => {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/users`,
+    );
+    const users = await res.json();
+    setUsers(users);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/users`);
-      const users = await res.json();
-      setUsers(users);
-    }
-
     fetchData();
-  }, [])
+  }, []);
 
-  if(!users) {
-    return <div>Loading...</div>
+  if (!users) {
+    return <div>Loading...</div>;
   }
 
   const handleDelete = async (id) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/users/delete/${id}`, {
-      method: "DELETE",
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/users/delete/${id}`,
+      {
+        method: "DELETE",
+      },
+    );
     const data = await res.json();
 
-    if(data) {
+    if (data) {
       toast.success("User Deleted Successfully");
+      fetchData();
     } else {
       console.log(data);
     }
-  }
+  };
 
   const handleRoleChange = async (role, id) => {
     const newRole = role === "client" ? "lawyer" : "client";
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/user/update/${id}`, {
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/user/update/${id}`,
+      {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ role: newRole}),
-      }
+        body: JSON.stringify({ role: newRole }),
+      },
     );
 
     const data = await res.json();
 
-    if(data) {
+    if (data) {
       toast.success("User Role Chnged Successfully");
+      fetchData();
     } else {
       console.log(data);
     }
-  }
+  };
 
   return (
     <section className="space-y-6 mt-10 flex flex-col items-center">
@@ -63,7 +71,9 @@ export default function UserList() {
         <table className="table w-full rounded-none text-center">
           <thead>
             <tr className="border-b border-white/10 uppercase tracking-wider text-lg md:text-xl">
-              <th className="py-4 px-4 md:px-6 rounded-none font-medium">Name</th>
+              <th className="py-4 px-4 md:px-6 rounded-none font-medium">
+                Name
+              </th>
               <th className="py-4 px-4 md:px-6 font-medium">Email</th>
               <th className="py-4 px-4 md:px-6 font-medium">Role</th>
               <th className="py-4 px-4 md:px-6 font-medium">Action</th>
@@ -76,10 +86,16 @@ export default function UserList() {
                 <td className="py-4 px-4 md:px-6">{user.email}</td>
                 <td className="py-4 px-4 md:px-6">{user.role}</td>
                 <td className="py-4 px-4 md:px-6 flex flex-col md:flex-row items-center justify-center gap-2">
-                  <button onClick={() => handleRoleChange(user.role, user._id)} className="btn inline-block text-xs uppercase tracking-wider px-3 py-1 rounded-none font-medium bg-emerald-950 text-white border border-emerald-800">
+                  <button
+                    onClick={() => handleRoleChange(user.role, user._id)}
+                    className="btn inline-block text-xs uppercase tracking-wider px-3 py-1 rounded-none font-medium bg-emerald-950 text-white border border-emerald-800"
+                  >
                     Change Role
                   </button>
-                  <button onClick={() => handleDelete(user._id)} className="btn inline-block text-xs uppercase tracking-wider px-3 py-1 rounded-none font-medium bg-rose-950 text-white border border-rose-900">
+                  <button
+                    onClick={() => handleDelete(user._id)}
+                    className="btn inline-block text-xs uppercase tracking-wider px-3 py-1 rounded-none font-medium bg-rose-950 text-white border border-rose-900"
+                  >
                     Delete
                   </button>
                 </td>
