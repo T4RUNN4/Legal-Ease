@@ -1,8 +1,8 @@
-import Link from "next/link";
+import HyperLinkButton from "./Buttons/HyperLinkButton";
 
 export default function FeaturedCard({ lawyer }) {
   return (
-    <div className="p-4 bg-[#fdfbf7] text-[#43311c] hover:scale-105 transition-all duration-300">
+    <div className="p-4 bg-[#43311c] text-white hover:scale-105 transition-all duration-300">
       <div className="w-full aspect-4/5 mb-6 overflow-hidden bg-gray-200">
         <img
           src={lawyer.photo}
@@ -12,20 +12,15 @@ export default function FeaturedCard({ lawyer }) {
       </div>
       <div className="px-2 pb-2">
         {lawyer.status !== "available" && (
-            <span className="badge rounded-none border-none px-4 py-3 font-mono text-xs tracking-wider uppercase bg-rose-900 text-rose-100 mb-2">
-              Busy
-            </span>
+          <span className="badge rounded-none border-none px-4 py-3 font-mono text-xs tracking-wider uppercase bg-rose-900 text-rose-100 mb-2">
+            Busy
+          </span>
         )}
-        <h3 className="text-xl font-medium mb-1">{lawyer.name}</h3>
-        <p className="text-gray-600">{lawyer.specialization}</p>
+        <h3 className="text-3xl font-medium mb-1">{lawyer.name}</h3>
+        <p className="text-[#c5a880]">{lawyer.specialization}</p>
 
-        <p className="mt-4">${lawyer.fee}/hr</p>
-        <Link
-          href={`lawyers/${lawyer._id}`}
-          className="mt-1 btn bg-[#43311c] text-[#fdfbf7] hover:bg-[#352514] border-none rounded-none px-5 py-2 min-h-0 h-auto font-medium text-xs tracking-wider shrink-0 uppercase"
-        >
-          View Profile
-        </Link>
+        <p className="mt-8 mb-4 text-xl">${lawyer.fee} / hour</p>
+        <HyperLinkButton text="View Profile" link={`lawyers/${lawyer._id}`} />
       </div>
     </div>
   );

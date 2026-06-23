@@ -69,7 +69,7 @@ export default function Hero() {
           <div className="max-w-2xl">
 
             <SubHeading text="Premier Legal Representation" />
-            <Heading texts={["Find & Hire", "Expert Legal Counsel"]} />
+            <Heading isHero="true" texts={["Find & Hire", "Expert Legal Counsel"]} />
             <HyperLinkButton text="Browse Lawyers" link="/lawyers?page=1" />
 
           </div>
