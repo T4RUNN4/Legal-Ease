@@ -14,9 +14,9 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       data-theme="light"
-      className="font-serif h-full antialiased bg-[#f8f4e9] text-[#43311c]"
+      className="font-serif antialiased bg-[#f8f4e9] text-[#43311c]"
     >
-      <body className="min-h-full flex flex-col">
+      <body className="flex flex-col">
         <Navbar />
         {children}
         <Footer />
