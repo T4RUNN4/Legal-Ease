@@ -48,6 +48,9 @@ export default function Register() {
     const data = await authClient.signIn.social({
       provider: "google",
     });
+    if(data) {
+      router.push("/")
+    }
   }
 
   return (

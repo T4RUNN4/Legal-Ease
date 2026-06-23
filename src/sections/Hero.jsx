@@ -1,8 +1,12 @@
 "use client";
-import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { authClient } from "@/lib/auth-client";
+import Link from "next/link";
+import { useState, useEffect } from "react";
 
 export default function Hero() {
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
@@ -10,6 +14,27 @@ export default function Hero() {
     "https://law.wub.edu.bd/assets/images/law-department.jpg",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjNT48Y47F0LpYRW19WBRzk9gScD3rzznVgi2FA5QHLDU-SG8Ql4ap-NlE&s=10",
   ];
+
+  const updateUserRole = async() => {
+    const data = {
+      userRole: localStorage.getItem("selectedRole"),
+    };
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/update-role/${user.id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      },
+    );
+    const ret = await res.json();
+  }
+
+  if (session && !(user?.role)) {
+    updateUserRole();
+  }
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -40,25 +65,26 @@ export default function Hero() {
       <div className="absolute inset-0 z-10 flex flex-col justify-center px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl w-full mx-auto">
           <div className="max-w-2xl">
-            
             <div className="flex items-center gap-4 mb-6">
               <span className="w-12 h-0.5 bg-[#c5a880]"></span>
               <span className="text-sm tracking-widest text-[#c5a880] font-medium uppercase">
                 Premier Legal Representation
               </span>
             </div>
-            
+
             <h1 className="text-5xl md:text-6xl lg:text-7xl text-[#fdfbf7] leading-tight mb-8">
               Find & Hire <br />
               <span className="text-transparent bg-clip-text bg-linear-to-r from-[#fdfbf7] to-[#c5a880]">
                 Expert Legal Counsel
               </span>
             </h1>
-            
-            <Link href="/lawyers" className="btn bg-[#fdfbf7] text-[#43311c] hover:bg-[#e6e2db] border-none rounded-none px-8 py-3 min-h-0 h-auto font-medium text-sm tracking-wider uppercase transition-transform hover:-translate-y-1">
+
+            <Link
+              href="/lawyers"
+              className="btn bg-[#fdfbf7] text-[#43311c] hover:bg-[#e6e2db] border-none rounded-none px-8 py-3 min-h-0 h-auto font-medium text-sm tracking-wider uppercase transition-transform hover:-translate-y-1"
+            >
               Browse Lawyers
             </Link>
-            
           </div>
         </div>
       </div>
@@ -70,14 +96,15 @@ export default function Hero() {
               key={index}
               onClick={() => setCurrentSlide(index)}
               className={`transition-all duration-500 h-1 rounded-none ${
-                currentSlide === index ? "w-16 bg-[#c5a880]" : "w-6 bg-white/30 hover:bg-white/60"
+                currentSlide === index
+                  ? "w-16 bg-[#c5a880]"
+                  : "w-6 bg-white/30 hover:bg-white/60"
               }`}
               aria-label={`Skip to slide ${index + 1}`}
             ></button>
           ))}
         </div>
       </div>
-
     </section>
   );
-};
+}
