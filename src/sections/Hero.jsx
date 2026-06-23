@@ -1,6 +1,6 @@
 "use client";
 
-import HyperLinkButton from "@/components/Buttons/HyperLinkButton";
+import Button from "@/components/Button";
 import Heading from "@/components/Heading";
 import SubHeading from "@/components/SubHeading";
 import { authClient } from "@/lib/auth-client";
@@ -18,7 +18,7 @@ export default function Hero() {
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjNT48Y47F0LpYRW19WBRzk9gScD3rzznVgi2FA5QHLDU-SG8Ql4ap-NlE&s=10",
   ];
 
-  const updateUserRole = async() => {
+  const updateUserRole = async () => {
     const data = {
       userRole: localStorage.getItem("selectedRole"),
     };
@@ -32,9 +32,9 @@ export default function Hero() {
         body: JSON.stringify(data),
       },
     );
-  }
+  };
 
-  if (session && !(user?.role)) {
+  if (session && !user?.role) {
     updateUserRole();
   }
 
@@ -67,11 +67,12 @@ export default function Hero() {
       <div className="absolute inset-0 z-10 flex flex-col justify-center px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl w-full mx-auto">
           <div className="max-w-2xl">
-
             <SubHeading text="Premier Legal Representation" />
-            <Heading isHero="true" texts={["Find & Hire", "Expert Legal Counsel"]} />
-            <HyperLinkButton text="Browse Lawyers" link="/lawyers?page=1" />
-
+            <Heading
+              isHero="true"
+              texts={["Find & Hire", "Expert Legal Counsel"]}
+            />
+            <Button text="Browse Lawyers" link="/lawyers?page=1" />
           </div>
         </div>
       </div>

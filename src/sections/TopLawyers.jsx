@@ -1,5 +1,5 @@
 import BestLawyer from "@/components/BestLawyer";
-import HyperLinkButton from "@/components/Buttons/HyperLinkButton";
+import Button from "@/components/Button";
 import Heading from "@/components/Heading";
 import SectionStructure from "@/components/SectionStructure";
 import SubHeading from "@/components/SubHeading";
@@ -37,7 +37,11 @@ export default async function TopLawyer() {
               </p>
             </div>
 
-            <HyperLinkButton text="Full Directory" link="/lawyers?page=1" variant="dark" />
+            <Button
+              text="Full Directory"
+              link="/lawyers?page=1"
+              variant="dark"
+            />
           </div>
         </div>
       </div>

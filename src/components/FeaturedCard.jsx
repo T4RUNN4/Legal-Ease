@@ -1,4 +1,4 @@
-import HyperLinkButton from "./Buttons/HyperLinkButton";
+import Button from "./Button";
 
 export default function FeaturedCard({ lawyer }) {
   return (
@@ -20,7 +20,7 @@ export default function FeaturedCard({ lawyer }) {
         <p className="text-[#c5a880]">{lawyer.specialization}</p>
 
         <p className="mt-8 mb-4 text-xl">${lawyer.fee} / hour</p>
-        <HyperLinkButton text="View Profile" link={`lawyers/${lawyer._id}`} />
+        <Button text="View Profile" link={`lawyers/${lawyer._id}`} />
       </div>
     </div>
   );
