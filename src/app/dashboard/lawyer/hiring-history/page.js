@@ -10,28 +10,24 @@ export default function LawyerHiringHistory() {
 
   const [hiring, setHiring] = useState(null);
 
-  useEffect(() => {
+  const loadHiringHistory = async () => {
     if (!userID) return;
 
-    const load = async () => {
-      try {
-        const res1 = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/lawyers/find/${userID}`,
-        );
-        const lawyer = await res1.json();
+    const res1 = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/lawyers/find/${userID}`,
+    );
+    const lawyer = await res1.json();
 
-        const res2 = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/lawyer/hiring-history/${lawyer._id}`,
-        );
+    const res2 = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/lawyer/hiring-history/${lawyer._id}`,
+    );
 
-        const hiringData = await res2.json();
-        setHiring(hiringData);
-      } catch (err) {
-        console.error(err);
-      }
-    };
+    const hiringData = await res2.json();
+    setHiring(hiringData);
+  };
 
-    load();
+  useEffect(() => {
+    loadHiringHistory();
   }, [userID]);
 
   const updateStatus = async (commentId, status) => {
@@ -47,6 +43,7 @@ export default function LawyerHiringHistory() {
     );
     const data = await res.json();
     toast.success("Status updated");
+    loadHiringHistory();
   };
 
   if (!hiring) {
