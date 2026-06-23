@@ -1,6 +1,8 @@
 "use client";
+
+import HyperLinkButton from "@/components/Buttons/HyperLinkButton";
+import Heading from "@/components/Heading";
 import { authClient } from "@/lib/auth-client";
-import Link from "next/link";
 import { useState, useEffect } from "react";
 
 export default function Hero() {
@@ -29,7 +31,6 @@ export default function Hero() {
         body: JSON.stringify(data),
       },
     );
-    const ret = await res.json();
   }
 
   if (session && !(user?.role)) {
@@ -72,19 +73,9 @@ export default function Hero() {
               </span>
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl text-[#fdfbf7] leading-tight mb-8">
-              Find & Hire <br />
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-[#fdfbf7] to-[#c5a880]">
-                Expert Legal Counsel
-              </span>
-            </h1>
+            <Heading texts={["Find & Hire", "Expert Legal Counsel"]} />
 
-            <Link
-              href="/lawyers"
-              className="btn bg-[#fdfbf7] text-[#43311c] hover:bg-[#e6e2db] border-none rounded-none px-8 py-3 min-h-0 h-auto font-medium text-sm tracking-wider uppercase transition-transform hover:-translate-y-1"
-            >
-              Browse Lawyers
-            </Link>
+            <HyperLinkButton text="Browse Lawyers" link="/lawyers?page=1" />
           </div>
         </div>
       </div>
