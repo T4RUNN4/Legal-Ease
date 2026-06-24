@@ -120,6 +120,14 @@ export default function LawyerDetails() {
                 </span>
               </span>
             </div>
+            <div className="flex justify-between items-baseline">
+              <span className="text-xs tracking-wider text-[#c7bca9] uppercase">
+                Joined At:
+              </span>
+              <span className="text-3xl font-medium text-[#c5a880]">
+                {lawyer.createdAt || "June 21, 2026"}
+              </span>
+            </div>
           </div>
 
           {session && (
