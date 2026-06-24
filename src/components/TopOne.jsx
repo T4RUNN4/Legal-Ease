@@ -1,19 +1,38 @@
+"use client";
+import { motion } from "motion/react";
 import Link from "next/link";
 
 export default function TopOne({ lawyer }) {
-  return (
-    <div className="lg:col-span-7 bg-[#43311c] border border-[#c5a880]/30 p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center justify-between relative overflow-hidden group hover:scale-105 transition-all duration-300">
-      <div className="absolute top-0 left-0 w-full h-0.75 bg-linear-to-r from-[#c5a880] to-transparent"></div>
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { staggerChildren: 0.1 },
+    },
+  };
 
-      <div className="w-full md:w-1/2 aspect-4/5 overflow-hidden bg-neutral rounded-none shrink-0">
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  return (
+    <motion.div variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-10%" }} 
+      className="lg:col-span-7 bg-[#43311c] border border-[#c5a880]/30 p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center justify-between relative overflow-hidden group hover:scale-105 transition-all duration-300">
+
+      <motion.div variants={itemVariants} className="w-full md:w-1/2 aspect-4/5 overflow-hidden bg-neutral rounded-none shrink-0">
         <img
           src={lawyer.photo}
           alt={lawyer.name}
           className="w-full h-full object-cover"
         />
-      </div>
+      </motion.div>
 
-      <div className="flex flex-col justify-between h-full py-2">
+      <motion.div variants={itemVariants} className="flex flex-col justify-between h-full py-2">
         <div>
           <div className="badge badge-outline border-[#c5a880] text-[#c5a880] rounded-none px-3 py-2 text-xs font-semibold tracking-wider uppercase mb-4">
             BEST AMONG ALL
@@ -42,7 +61,7 @@ export default function TopOne({ lawyer }) {
         >
           View Profile
         </Link>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
