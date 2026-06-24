@@ -1,8 +1,10 @@
 "use client";
 import Button from "@/components/Button";
 import Heading from "@/components/Heading";
+import Loading from "@/components/Loading";
 import SectionStructure from "@/components/SectionStructure";
 import SubHeading from "@/components/SubHeading";
+import TableData from "@/components/TableData";
 import TableRow from "@/components/TableRow";
 import Table from "@/sections/Table";
 import { useEffect, useState } from "react";
@@ -24,7 +26,7 @@ export default function UserList() {
   }, []);
 
   if (!users) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   const handleDelete = async (id) => {
@@ -76,18 +78,18 @@ export default function UserList() {
         <Table tableHeads={["Name", "Email", "Role", "Actions"]}>
           {users.map((user) => (
             <TableRow key={user._id}>
-              <td className="py-4 px-4 md:px-6">{user.name}</td>
-              <td className="py-4 px-4 md:px-6">{user.email}</td>
-              <td className="py-4 px-4 md:px-6 uppercase">{user.role}</td>
-              <td className="py-4 px-4 md:px-6 flex flex-col md:flex-row gap-2">
+              <TableData text={user.name} />
+              <TableData text={user.email} />
+              <td className="py-4 md:px-6 uppercase">{user.role}</td>
+              <td className="py-4 md:px-6 flex flex-col md:flex-row gap-2">
                 <Button
-                  text="Change Role"
+                  text={user.role === "lawyer" ? "client" : "lawyer"}
                   variant="dark"
                   type="action"
                   action={() => handleRoleChange(user.role, user._id)}
                 />
                 <Button
-                  text="Delete User"
+                  text="Delete"
                   type="action"
                   variant="delete"
                   action={() => handleDelete(user._id)}

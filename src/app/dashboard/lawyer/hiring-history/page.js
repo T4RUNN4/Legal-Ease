@@ -1,8 +1,11 @@
 "use client";
 import Button from "@/components/Button";
+import Fallback from "@/components/Fallback";
 import Heading from "@/components/Heading";
+import Loading from "@/components/Loading";
 import SectionStructure from "@/components/SectionStructure";
 import SubHeading from "@/components/SubHeading";
+import TableData from "@/components/TableData";
 import TableRow from "@/components/TableRow";
 import { authClient } from "@/lib/auth-client";
 import Table from "@/sections/Table";
@@ -53,7 +56,7 @@ export default function LawyerHiringHistory() {
   };
 
   if (!hiring) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
@@ -62,46 +65,48 @@ export default function LawyerHiringHistory() {
       <Heading texts={["Client Hiring Requests"]} />
 
       <div className="mt-16">
-        <Table tableHeads={["Client Name", "Date", "Status"]}>
-          {hiring.map((hire) => (
-            <TableRow key={hire._id}>
-              <td className="py-4 px-6 font-medium ">{hire.userName}</td>
-              <td className="py-4 px-6">
-                {format(new Date(hire.hiredAt), "PPP")}
-              </td>
-              <td className="py-4 px-6 flex gap-2">
-                {hire.status === "pending" ? (
-                  <>
-                    <Button
-                      text="Accept"
-                      type="action"
-                      variant="payment"
-                      action={() => updateStatus(hire._id, "unpaid")}
-                    />
-                    <Button
-                      text="Reject"
-                      type="action"
-                      variant="delete"
-                      action={() => updateStatus(hire._id, "rejected")}
-                    />
-                  </>
-                ) : (
-                  <span
-                    className={`uppercase tracking-wider rounded-none ${
-                      hire.status === "paid"
-                        ? "text-emerald-600"
-                        : hire.status === "rejected"
-                          ? "text-rose-600"
-                          : "text-gray-400"
-                    }`}
-                  >
-                    {hire.status}
-                  </span>
-                )}
-              </td>
-            </TableRow>
-          ))}
-        </Table>
+        {hiring.length === 0 ? (
+          <Fallback text="You didn't get any client yet" />
+        ) : (
+          <Table tableHeads={["Client Name", "Date", "Status"]}>
+            {hiring.map((hire) => (
+              <TableRow key={hire._id}>
+                <TableData text={hire.userName} />
+                <TableData text={format(new Date(hire.hiredAt), "PPP")} />
+                <td className="py-4 md:px-6 flex flex-col md:flex-row gap-2">
+                  {hire.status === "pending" ? (
+                    <>
+                      <Button
+                        text="Accept"
+                        type="action"
+                        variant="payment"
+                        action={() => updateStatus(hire._id, "unpaid")}
+                      />
+                      <Button
+                        text="Reject"
+                        type="action"
+                        variant="delete"
+                        action={() => updateStatus(hire._id, "rejected")}
+                      />
+                    </>
+                  ) : (
+                    <span
+                      className={`uppercase tracking-wider rounded-none ${
+                        hire.status === "paid"
+                          ? "text-emerald-600"
+                          : hire.status === "rejected"
+                            ? "text-rose-600"
+                            : "text-gray-400"
+                      }`}
+                    >
+                      {hire.status}
+                    </span>
+                  )}
+                </td>
+              </TableRow>
+            ))}
+          </Table>
+        )}
       </div>
     </SectionStructure>
   );
