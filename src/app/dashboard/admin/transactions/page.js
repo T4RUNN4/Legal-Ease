@@ -12,7 +12,7 @@ export default async function Transactions() {
   const transactions = await res.json();
 
   return (
-    <SectionStructure>
+    <SectionStructure page="true">
       <SubHeading text="Transaction List" />
       <Heading texts={["Payment Transactions History"]} />
 

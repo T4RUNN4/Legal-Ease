@@ -8,7 +8,7 @@ export default async function Analytics() {
     const stats = await res.json();
 
     return (
-      <SectionStructure>
+      <SectionStructure page="true">
         <SubHeading text="Legal Ease Statistics" />
         <Heading texts={["Analytics Dashboard"]} />
 

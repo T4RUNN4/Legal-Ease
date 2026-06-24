@@ -68,7 +68,7 @@ export default function UserList() {
   };
 
   return (
-    <SectionStructure>
+    <SectionStructure page="true">
       <SubHeading text="Users List" />
       <Heading texts={["Registered Users of Legal Ease"]} />
 

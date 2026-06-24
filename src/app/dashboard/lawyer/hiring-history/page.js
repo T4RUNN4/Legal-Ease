@@ -57,7 +57,7 @@ export default function LawyerHiringHistory() {
   }
 
   return (
-    <SectionStructure>
+    <SectionStructure page="true">
       <SubHeading text="Hiring History" />
       <Heading texts={["Client Hiring Requests"]} />
 
