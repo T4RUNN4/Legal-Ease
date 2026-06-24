@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@/components/Button";
+import CommentModal from "@/components/CommentModal";
 import Heading from "@/components/Heading";
 import HiringModal from "@/components/HiringModal";
 import SectionStructure from "@/components/SectionStructure";
@@ -119,11 +120,16 @@ export default function LawyerDetails() {
                 }
                 variant="light"
               />
-              <Button
-                type="action"
-                text={`Comment ${lawyer.name.split(" ")[0]}`}
-                variant="secondary"
-              />
+              {lawyer.client.includes(user.id) && (
+                <Button
+                  type="action"
+                  action={() =>
+                  document.getElementById("comment").showModal()
+                }
+                  text={`Comment ${lawyer.name.split(" ")[0]}`}
+                  variant="secondary"
+                />
+              )}
             </div>
           )}
 
@@ -142,11 +148,14 @@ export default function LawyerDetails() {
           </div>
 
           <p className="mt-16 text-xl font-medium">User Comments</p>
-          <p className="font-medium text-gray-400 px-4 py-10 pr-10 border border-black/10">No comments Yet...</p>
+          <p className="font-medium text-gray-400 px-4 py-10 pr-10 border border-black/10">
+            No comments Yet...
+          </p>
         </div>
       </div>
 
       <HiringModal func={handleHiring} lawyer={lawyer} />
+      <CommentModal name={lawyer.name} userName={user?.name} userId={user?.id} lawyerId={lawyer.id} />
     </SectionStructure>
   );
 }
