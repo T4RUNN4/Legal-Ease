@@ -2,9 +2,9 @@ export default function Table({ tableHeads, children }) {
   return (
     <table className="table w-full rounded-none">
       <thead>
-        <tr className="tracking-wider text-lg md:text-xl bg-[#43311c] text-[#fdfbf7] font-bold">
+        <tr className="tracking-wider md:text-xl bg-[#43311c] text-[#fdfbf7] font-bold">
           {tableHeads.map((tableHead) => {
-            return <th className="py-4 px-6 rounded-none">{tableHead}</th>;
+            return <th className="py-4 md:px-6 rounded-none">{tableHead}</th>;
           })}
         </tr>
       </thead>

@@ -102,7 +102,7 @@ export default function LawyerDetails() {
                       : "bg-rose-400"
                   }`}
                 ></span>
-                {lawyer.status}
+                {lawyer.status === "available" ? "available" : "busy"}
               </span>
             </div>
           </div>
@@ -132,7 +132,7 @@ export default function LawyerDetails() {
                 }
                 variant="light"
               />
-              {lawyer.client.includes(user.id) && (
+              {lawyer.client && lawyer.client.includes(user.id) && (
                 <Button
                   type="action"
                   action={() => document.getElementById("comment").showModal()}

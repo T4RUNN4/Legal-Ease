@@ -1,9 +1,12 @@
 "use client";
 
 import Button from "@/components/Button";
+import Fallback from "@/components/Fallback";
 import Heading from "@/components/Heading";
+import Loading from "@/components/Loading";
 import SectionStructure from "@/components/SectionStructure";
 import SubHeading from "@/components/SubHeading";
+import TableData from "@/components/TableData";
 import TableRow from "@/components/TableRow";
 import UpdateCommentModal from "@/components/UpdateCommentModal";
 import { authClient } from "@/lib/auth-client";
@@ -33,6 +36,10 @@ export default function UserComments() {
       fetchComments();
     }
   }, [id]);
+
+  if (!comments) {
+    return <Loading />;
+  }
 
   const handleComment = (comment) => {
     setActiveComment(comment);
@@ -66,19 +73,19 @@ export default function UserComments() {
 
       <div className="mt-16">
         <Table tableHeads={["Laywer", "Comment", "Date", "Action"]}>
-          {!comments ? (
-            <></>
+          {comments.length === 0 ? (
+            <Fallback text="You didn't commented any lawyer yet" />
           ) : (
             <>
               {comments.map((comment, index) => {
                 return (
                   <TableRow key={index}>
-                    <td className="py-4 px-6">{comment.lawyerName}</td>
-                    <td className="py-4 px-6">{comment.comment}</td>
-                    <td className="py-4 px-6">
+                    <TableData text={comment.lawyerName} />
+                    <TableData text={comment.comment} />
+                    <TableData text=
                       {format(new Date(comment.date), "PPP")}
-                    </td>
-                    <td className="flex gap-2 py-4 px-6">
+                     />
+                    <td className="flex flex-col md:flex-row gap-2 py-4 md:px-6">
                       <Button
                         text="Edit"
                         action={() => handleComment(comment)}
@@ -94,8 +101,7 @@ export default function UserComments() {
                     </td>
                   </TableRow>
                 );
-              })}
-            </>
+              })}</>
           )}
         </Table>
       </div>

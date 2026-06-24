@@ -9,6 +9,9 @@ import { authClient } from "@/lib/auth-client";
 import Table from "@/sections/Table";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
+import Loading from "@/components/Loading";
+import Fallback from "../../../../components/Fallback";
+import TableData from "@/components/TableData";
 
 export default function UserHiringHistory() {
   const { data: session } = authClient.useSession();
@@ -31,7 +34,7 @@ export default function UserHiringHistory() {
   }, [userID]);
 
   if (!hiring) {
-    return <div>Loading...</div>;
+    return <Loading />
   }
 
   const handleCheckout = async (hiringId) => {
@@ -49,50 +52,54 @@ export default function UserHiringHistory() {
       <SubHeading text="Hiring History" />
       <Heading texts={["Lawyers You Hired"]} />
 
-      <div className="border border-white/10 mt-16 w-full flex items-center justify-center">
-        <Table
-          tableHeads={[
-            "Name",
-            "Specialization",
-            "Fee",
-            "Hiring Date",
-            "Status",
-          ]}
-        >
-          {hiring.map((hire) => (
-            <TableRow key={hire._id}>
-              <td className="py-4 px-6">{hire.lawyerName}</td>
-              <td className="py-4 px-6">{hire.specialization}</td>
-              <td className="py-4 px-6">${hire.fee}</td>
-              <td className="py-4 px-6">
-                {format(new Date(hire.hiredAt), "PPP")}
-              </td>
-              <td className="py-4 px-6">
-                {hire.status === "unpaid" ? (
-                  <Button
-                    text="Pay"
-                    type="action"
-                    variant="payment"
-                    action={() => handleCheckout(hire._id)}
-                  />
-                ) : (
-                  <span
-                    className={`uppercase tracking-wider rounded-none ${
-                      hire.status === "paid"
-                        ? "text-emerald-600"
-                        : hire.status === "rejected"
-                          ? "text-rose-600"
-                          : "text-gray-400"
-                    }`}
-                  >
-                    {hire.status}
-                  </span>
-                )}
-              </td>
-            </TableRow>
-          ))}
-        </Table>
-      </div>
+      {hiring.length === 0 ? (
+        <Fallback text="You didn't hired any lawyer yet" />
+      ) : (
+        <div className="border border-white/10 mt-16 w-full flex items-center justify-center">
+          <Table
+            tableHeads={[
+              "Name",
+              "Category",
+              "Fee",
+              "Hiring Date",
+              "Status",
+            ]}
+          >
+            {hiring.map((hire) => (
+              <TableRow key={hire._id}>
+                <TableData text={hire.lawyerName} />
+                <TableData text={hire.specialization} />
+                <TableData text={`$${hire.fee}`} />
+                <TableData text={format(new Date(hire.hiredAt), "PPP")} />
+                <TableData
+                  text={
+                    hire.status === "unpaid" ? (
+                      <Button
+                        text="Pay"
+                        type="action"
+                        variant="payment"
+                        action={() => handleCheckout(hire._id)}
+                      />
+                    ) : (
+                      <span
+                        className={`uppercase tracking-wider rounded-none ${
+                          hire.status === "paid"
+                            ? "text-emerald-600"
+                            : hire.status === "rejected"
+                              ? "text-rose-600"
+                              : "text-gray-400"
+                        }`}
+                      >
+                        {hire.status}
+                      </span>
+                    )
+                  }
+                />
+              </TableRow>
+            ))}
+          </Table>
+        </div>
+      )}
     </SectionStructure>
   );
 }

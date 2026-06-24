@@ -4,6 +4,7 @@ import FeaturedCard from "@/components/FeaturedCard";
 import Heading from "@/components/Heading";
 import SectionStructure from "@/components/SectionStructure";
 import SubHeading from "@/components/SubHeading";
+import BrowseLawyers from "@/skeleton-loading/S-BrowseLawyers";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -42,7 +43,7 @@ export default function Lawyers() {
   }, [page, search, specialization, maxFee]);
 
   if (!data) {
-    return <div>Loading...</div>;
+    return <BrowseLawyers />;
   }
 
   const updateQuery = (params) => {
@@ -61,7 +62,7 @@ export default function Lawyers() {
       <SubHeading text="Available Lawyers in the Platform" />
       <Heading texts={["Browse Lawyers"]} />
 
-      <div className="flex my-16 gap-8">
+      <div className="flex flex-col md:flex-row my-16 gap-8">
         <div className="relative flex items-center w-full">
           <span className="absolute left-3 text-[#c7bca9]/50 pointer-events-none">
             <svg
@@ -95,7 +96,7 @@ export default function Lawyers() {
           onChange={(e) =>
             updateQuery({ specialization: e.target.value, page: 1 })
           }
-          className="bg-[#352514] border border-white/10 shadow-2xl rounded-none text-white px-8"
+          className="bg-[#352514] border border-white/10 shadow-2xl rounded-none text-white px-8 py-4"
         >
           <option value="">All</option>
           <option value="Criminal Defense">Criminal Defense</option>

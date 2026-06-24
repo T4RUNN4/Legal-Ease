@@ -13,7 +13,7 @@ export default function NotFound() {
         somewhere else.
       </p>
       </div>
-      <div className="flex items-center justify-center gap-8 mt-20">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-8 mt-20">
         <Button text="Return Home" variant="dark" link="/" />
         <Button text="Go To Dashboard" link="/dashboard" />
       </div>
