@@ -7,7 +7,6 @@ export default async function PaymentSuccess({ searchParams }) {
   const { session_id, hiringId } = await searchParams;
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/verify-payment?session_id=${session_id}&hiringId=${hiringId}`)
   const data = await res.json();
-  console.log(res);
 
   if(!data) {
     return <div>Loading...</div>
