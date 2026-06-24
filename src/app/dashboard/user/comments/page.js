@@ -5,6 +5,7 @@ import Heading from "@/components/Heading";
 import SectionStructure from "@/components/SectionStructure";
 import SubHeading from "@/components/SubHeading";
 import TableRow from "@/components/TableRow";
+import UpdateCommentModal from "@/components/UpdateCommentModal";
 import { authClient } from "@/lib/auth-client";
 import Table from "@/sections/Table";
 import { format } from "date-fns";
@@ -17,6 +18,7 @@ export default function UserComments() {
   const id = user?.id;
 
   const [comments, setComments] = useState(null);
+  const [activeComment, setActiveComment] = useState(null);
 
   const fetchComments = async () => {
     const res = await fetch(
@@ -31,6 +33,13 @@ export default function UserComments() {
       fetchComments();
     }
   }, [id]);
+
+  const handleComment = (comment) => {
+    setActiveComment(comment);
+    setTimeout(() => {
+      document.getElementById("update_comment_modal").showModal();
+    }, 50);
+  };
 
   const handleDelete = async (id) => {
     const res = await fetch(
@@ -70,7 +79,12 @@ export default function UserComments() {
                       {format(new Date(comment.date), "PPP")}
                     </td>
                     <td className="flex gap-2 py-4 px-6">
-                      <Button text="Edit" type="action" variant="payment" />
+                      <Button
+                        text="Edit"
+                        action={() => handleComment(comment)}
+                        type="action"
+                        variant="payment"
+                      />
                       <Button
                         text="Delete"
                         type="action"
@@ -85,6 +99,14 @@ export default function UserComments() {
           )}
         </Table>
       </div>
+
+      {activeComment && (
+        <UpdateCommentModal
+          key={activeComment._id}
+          comment={activeComment}
+          fetchComments={fetchComments}
+        />
+      )}
     </SectionStructure>
   );
 }
