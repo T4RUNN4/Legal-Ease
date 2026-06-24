@@ -9,6 +9,7 @@ import { authClient } from "@/lib/auth-client";
 import Table from "@/sections/Table";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function UserComments() {
   const { data: session } = authClient.useSession();
@@ -31,6 +32,24 @@ export default function UserComments() {
     }
   }, [id]);
 
+  const handleDelete = async (id) => {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/comments/delete/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    const ret = await res.json();
+
+    if (ret) {
+      toast.success("Your comment is deleted");
+      fetchComments();
+    }
+  };
+
   return (
     <SectionStructure>
       <SubHeading text="Your Comments" />
@@ -51,8 +70,13 @@ export default function UserComments() {
                       {format(new Date(comment.date), "PPP")}
                     </td>
                     <td className="flex gap-2 py-4 px-6">
-                      <Button text="Edit" type="action" variant="payment"></Button>
-                      <Button text="Delete" type="action" variant="delete"></Button>
+                      <Button text="Edit" type="action" variant="payment" />
+                      <Button
+                        text="Delete"
+                        type="action"
+                        action={() => handleDelete(comment._id)}
+                        variant="delete"
+                      />
                     </td>
                   </TableRow>
                 );
