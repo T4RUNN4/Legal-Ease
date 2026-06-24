@@ -67,6 +67,7 @@ export default function Register() {
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-5 mt-16 border-2 border-black/10 p-8 max-w-2xl mx-auto"
       >
+        <h3 className="text-3xl font-bold mt-4 mb-10 text-center">Registration From</h3>
         <div className="form-control w-full">
           <FormLabel label="Your Role" />
           <div className="grid grid-cols-2 gap-4 mt-1">

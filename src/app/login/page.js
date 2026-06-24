@@ -1,5 +1,6 @@
 "use client";
 
+import Button from "@/components/Button";
 import FormLabel from "@/components/FormLabel";
 import Heading from "@/components/Heading";
 import SectionStructure from "@/components/SectionStructure";
@@ -35,10 +36,10 @@ export default function Login() {
   };
 
   const handleGoogleLogin = async () => {
-     await authClient.signIn.social({
-        provider: "google",
-      });
-    }
+    await authClient.signIn.social({
+      provider: "google",
+    });
+  };
 
   return (
     <SectionStructure>
@@ -49,11 +50,14 @@ export default function Login() {
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-5 mt-16 border-2 border-black/10 p-8 max-w-2xl mx-auto"
       >
+        <h3 className="text-3xl font-bold mt-4 mb-10 text-center">
+          Login From
+        </h3>
         <div className="form-control w-full">
           <FormLabel label="Email" />
           <input
             type="email"
-            className="input w-full border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none h-11"
+            className="border border-[#43311c]/20 focus:border-[#c5a880] focus:outline-none rounded-none w-full transition-colors px-4 py-2"
             placeholder="Enter your email"
             {...register("email", { required: true })}
           />
@@ -66,7 +70,7 @@ export default function Login() {
           <FormLabel label="Password" />
           <input
             type="password"
-            className="input w-full border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none h-11 "
+            className="border border-[#43311c]/20 focus:border-[#c5a880] focus:outline-none rounded-none w-full transition-colors px-4 py-2"
             placeholder="Enter password"
             {...register("password", { required: true })}
           />
@@ -75,30 +79,23 @@ export default function Login() {
           )}
         </div>
 
-        <button
-          type="submit"
-          className="btn bg-[#43311c] text-[#fdfbf7] hover:bg-[#352514] border-none rounded-none px-5 py-2 min-h-0 h-auto font-medium tracking-wider shrink-0 uppercase"
-        >
-          Login
-        </button>
+        <div className="flex gap-4">
+          <Button text="Login" type="action" btnType="submit" variant="dark" />
+          <Button
+            text="Continue With Google"
+            type="action"
+            action={handleGoogleLogin}
+            variant="none"
+          />
+        </div>
       </form>
 
-      <div className="flex flex-col items-center justify-center">
-        <p className="text-center">
-          New to Legal Ease?{" "}
-          <Link href="/register" className="text-[#c5a880] hover:underline">
-            Sign up
-          </Link>
-        </p>
-        <p className="text-center text-gray-300 my-4">OR</p>
-        <button
-          type="button"
-          onClick={handleGoogleLogin}
-          className="btn btn-ghost border border-[#43311c] rounded-none px-5 py-2 min-h-0 h-auto font-medium tracking-wider shrink-0 uppercase"
-        >
-          Continue With Google
-        </button>
-      </div>
+      <p className="text-lg text-center mt-8">
+        New to Legal Ease?{" "}
+        <Link href="/register" className="font-bold underline underline-offset-2">
+          Sign-Up
+        </Link>
+      </p>
     </SectionStructure>
   );
 }
