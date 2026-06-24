@@ -15,7 +15,6 @@ export default function RootLayout({ children }) {
     <div className="flex w-full min-h-screen">
       <aside className="hidden lg:w-64 bg-[#352514] border-r border-white/10 lg:flex flex-col justify-between min-h-screen shrink-0">
         <div className="p-6">
-
           <div className="mt-10 mb-8 pb-6 border-b border-white/10">
             <span className="text-2xl font-serif font-semibold tracking-wider block text-[#c5a880]">
               DASHBOARD
@@ -26,48 +25,53 @@ export default function RootLayout({ children }) {
           </div>
 
           <nav className="space-y-6">
-
-            {user && user.role === "client" && (
-              <div className="space-y-2">
-                <ul className="space-y-1">
-                  <li>
-                    <Link
-                      href="/dashboard/user/hiring-history"
-                      className={`flex items-center px-4 py-3 font-medium transition-all duration-200 border-l-2 rounded-none ${
-                        isActive("/dashboard/user/hiring-history")
-                          ? "bg-[#fdfbf7] text-[#43311c] border-[#c5a880]"
-                          : "border-transparent text-[#c7bca9] hover:bg-white/5 hover:text-[#fdfbf7]"
-                      }`}
-                    >
-                      Hiring History
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/dashboard/user/update-profile"
-                      className={`flex items-center px-4 py-3 font-medium transition-all duration-200 border-l-2 rounded-none ${
-                        isActive("/dashboard/user/update-profile")
-                          ? "bg-[#fdfbf7] text-[#43311c] border-[#c5a880]"
-                          : "border-transparent text-[#c7bca9] hover:bg-white/5 hover:text-[#fdfbf7]"
-                      }`}
-                    >
-                      Update Profile
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/dashboard/user/comments"
-                      className={`flex items-center px-4 py-3 font-medium transition-all duration-200 border-l-2 rounded-none ${
-                        isActive("/dashboard/user/comments")
-                          ? "bg-[#fdfbf7] text-[#43311c] border-[#c5a880]"
-                          : "border-transparent text-[#c7bca9] hover:bg-white/5 hover:text-[#fdfbf7]"
-                      }`}
-                    >
-                      Comments
-                    </Link>
-                  </li>
-                </ul>
+            {!user ? (
+              <div className="border-transparent text-[#c7bca9] hover:bg-white/5 hover:text-[#fdfbf7] animate-pulse">
+                Loading...
               </div>
+            ) : (
+              user.role === "client" && (
+                <div className="space-y-2">
+                  <ul className="space-y-1">
+                    <li>
+                      <Link
+                        href="/dashboard/user/hiring-history"
+                        className={`flex items-center px-4 py-3 font-medium transition-all duration-200 border-l-2 rounded-none ${
+                          isActive("/dashboard/user/hiring-history")
+                            ? "bg-[#fdfbf7] text-[#43311c] border-[#c5a880]"
+                            : "border-transparent text-[#c7bca9] hover:bg-white/5 hover:text-[#fdfbf7]"
+                        }`}
+                      >
+                        Hiring History
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/dashboard/user/update-profile"
+                        className={`flex items-center px-4 py-3 font-medium transition-all duration-200 border-l-2 rounded-none ${
+                          isActive("/dashboard/user/update-profile")
+                            ? "bg-[#fdfbf7] text-[#43311c] border-[#c5a880]"
+                            : "border-transparent text-[#c7bca9] hover:bg-white/5 hover:text-[#fdfbf7]"
+                        }`}
+                      >
+                        Update Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/dashboard/user/comments"
+                        className={`flex items-center px-4 py-3 font-medium transition-all duration-200 border-l-2 rounded-none ${
+                          isActive("/dashboard/user/comments")
+                            ? "bg-[#fdfbf7] text-[#43311c] border-[#c5a880]"
+                            : "border-transparent text-[#c7bca9] hover:bg-white/5 hover:text-[#fdfbf7]"
+                        }`}
+                      >
+                        Comments
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              )
             )}
 
             {user && user.role === "lawyer" && (
@@ -149,9 +153,7 @@ export default function RootLayout({ children }) {
         {user && (
           <div className="p-4 border-t border-white/10 bg-[#2e1f0f] flex items-center justify-between gap-3">
             <div className="overflow-hidden truncate">
-              <p className="font-medium text-[#fdfbf7] truncate">
-                {user.name}
-              </p>
+              <p className="font-medium text-[#fdfbf7] truncate">{user.name}</p>
               <p className="text-[10px] font-mono text-[#c5a880] uppercase tracking-wider mt-0.5">
                 {user.role}
               </p>

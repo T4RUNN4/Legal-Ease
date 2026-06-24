@@ -1,5 +1,11 @@
 "use client"
 
+import Button from "@/components/Button";
+import FormLabel from "@/components/FormLabel";
+import Heading from "@/components/Heading";
+import Loading from "@/components/Loading";
+import SectionStructure from "@/components/SectionStructure";
+import SubHeading from "@/components/SubHeading";
 import { authClient } from "@/lib/auth-client";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -37,26 +43,27 @@ export default function UpdateProfile() {
   }
 
   if (!user) {
-    return <div>Loading...</div>;
+    return <Loading />
   }
 
   return (
-    <section className="lg:col-span-4 p-6 md:p-8 space-y-6">
-      <div>
-        <h2 className="text-4xl font-medium text-center">Update Profile</h2>
-      </div>
+    <SectionStructure>
+      <SubHeading text="Profile Update" />
+      <Heading texts={["Update Your Profile"]} />
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="space-y-5 mt-16 border-2 border-black/10 p-8 max-w-2xl mx-auto"
+      >
+        <h3 className="text-3xl font-bold mt-4 mb-10 text-center">
+          Profile Update From
+        </h3>
         <div className="form-control w-full">
-          <label className="label py-1">
-            <span className="label-text uppercase tracking-wider">
-              Username
-            </span>
-          </label>
+          <FormLabel label="Username" />
           <input
             type="text"
             defaultValue={user.name}
-            className="input w-full border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none h-11"
+            className="border border-[#43311c]/20 focus:border-[#c5a880] focus:outline-none rounded-none w-full transition-colors px-4 py-2"
             placeholder="Enter username"
             {...register("name", { required: true })}
           />
@@ -66,13 +73,11 @@ export default function UpdateProfile() {
         </div>
 
         <div className="form-control w-full">
-          <label className="label py-1">
-            <span className="label-text uppercase tracking-wider">Email</span>
-          </label>
+          <FormLabel label="Email" />
           <input
             type="email"
             defaultValue={user.email}
-            className="input w-full border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none h-11"
+            className="border border-[#43311c]/20 focus:border-[#c5a880] focus:outline-none rounded-none w-full transition-colors px-4 py-2"
             placeholder="Enter username"
             {...register("email", { required: true })}
           />
@@ -82,15 +87,11 @@ export default function UpdateProfile() {
         </div>
 
         <div className="form-control w-full">
-          <label className="label py-1">
-            <span className="label-text uppercase tracking-wider">
-              Profile Image URL
-            </span>
-          </label>
+          <FormLabel label="Profile Image" />
           <input
             type="text"
             defaultValue={user.image}
-            className="input w-full border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none h-11 "
+            className="border border-[#43311c]/20 focus:border-[#c5a880] focus:outline-none rounded-none w-full transition-colors px-4 py-2"
             {...register("image", { required: true })}
           />
           {errors.image && (
@@ -98,13 +99,8 @@ export default function UpdateProfile() {
           )}
         </div>
 
-        <button
-          type="submit"
-          className="btn bg-[#43311c] text-[#fdfbf7] hover:bg-[#352514] border-none rounded-none px-5 py-2 min-h-0 h-auto font-medium tracking-wider shrink-0 uppercase"
-        >
-          Update User
-        </button>
+        <Button text="Update Profile" type="action" btnType="submit" variant="dark" />
       </form>
-    </section>
+    </SectionStructure>
   );
 }

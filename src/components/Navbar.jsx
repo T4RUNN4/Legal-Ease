@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
-  const { data: session } = authClient.useSession();
+  const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
   
   const pathname = usePathname();
@@ -34,9 +34,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="w-full backdrop-blur-md border-b border-black/10 sticky top-0 z-50">
-      <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-[#c5a880]/60 via-[#c5a880]/10 to-transparent"></div>
-
+    <header className="w-full bg-[#f8f4e9] border-b border-black/10 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 navbar h-20 min-h-0 flex justify-between items-center">
         <div className="navbar-start flex items-center gap-2">
           <div className="dropdown lg:hidden">
@@ -82,16 +80,21 @@ export default function Navbar() {
                 </Link>
               </li>
               <li className="border-t border-white/5 mt-2 pt-2">
-                <span className="text-[10px] uppercase tracking-widest text-[#c5a880] bg-transparent font-semibold">
-                  Dashboard Context
-                </span>
+                <li>
+                  <Link
+                    href="/dashboard"
+                    className="rounded-none text-[#c5a880]"
+                  >
+                    Dashboard
+                  </Link>
+                </li>
                 <ul className="pl-2 mt-1 space-y-0.5">
                   {user?.role === "client" && (
                     <>
                       <li>
                         <Link
                           href="/dashboard/user/hiring-history"
-                          className="rounded-none"
+                          className="rounded-none text-[#c5a880]"
                         >
                           Hiring History
                         </Link>
@@ -99,7 +102,7 @@ export default function Navbar() {
                       <li>
                         <Link
                           href="/dashboard/user/update-profile"
-                          className="rounded-none"
+                          className="rounded-none text-[#c5a880]"
                         >
                           Update Profile
                         </Link>
@@ -107,7 +110,7 @@ export default function Navbar() {
                       <li>
                         <Link
                           href="/dashboard/user/comments"
-                          className="rounded-none"
+                          className="rounded-none text-[#c5a880]"
                         >
                           Comments
                         </Link>
@@ -119,7 +122,7 @@ export default function Navbar() {
                       <li>
                         <Link
                           href="/dashboard/lawyer/hiring-history"
-                          className="rounded-none"
+                          className="rounded-none text-[#c5a880]"
                         >
                           Hiring History
                         </Link>
@@ -127,7 +130,7 @@ export default function Navbar() {
                       <li>
                         <Link
                           href="/dashboard/lawyer/legal-profile"
-                          className="rounded-none"
+                          className="rounded-none text-[#c5a880]"
                         >
                           Legal Profile
                         </Link>
@@ -139,7 +142,7 @@ export default function Navbar() {
                       <li>
                         <Link
                           href="/dashboard/admin/user-list"
-                          className="rounded-none"
+                          className="rounded-none text-[#c5a880]"
                         >
                           Manage Users
                         </Link>
@@ -147,7 +150,7 @@ export default function Navbar() {
                       <li>
                         <Link
                           href="/dashboard/admin/transactions"
-                          className="rounded-none"
+                          className="rounded-none text-[#c5a880]"
                         >
                           Transactions
                         </Link>
@@ -155,7 +158,7 @@ export default function Navbar() {
                       <li>
                         <Link
                           href="/dashboard/admin/analytics"
-                          className="rounded-none"
+                          className="rounded-none text-[#c5a880]"
                         >
                           Analytics
                         </Link>
@@ -305,32 +308,9 @@ export default function Navbar() {
         </div>
 
         <div className="navbar-end flex items-center gap-4">
-          <div className="relative hidden md:flex items-center">
-            <span className="absolute left-3 text-[#c7bca9]/50 pointer-events-none">
-              <svg
-                className="h-4 w-4"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </span>
-
-            <input
-              type="search"
-              placeholder="Search registry..."
-              className="border border-[#43311c]/20 focus:border-[#c5a880] focus:outline-none rounded-none pl-9 pr-4 h-9 w-48 transition-colors"
-            />
-          </div>
-
-          {user ? (
+          {isPending ? (
+            <p className="animate-pulse">Loading...</p>
+          ) : user ? (
             <button
               onClick={handleLogout}
               className="btn border border-rose-900 bg-rose-900 text-white hover:bg-rose-950 transition-colors rounded-none px-4 h-9 min-h-0 text-sm uppercase tracking-wider font-semibold"
