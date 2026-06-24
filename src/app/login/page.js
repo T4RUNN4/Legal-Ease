@@ -1,5 +1,9 @@
 "use client";
 
+import FormLabel from "@/components/FormLabel";
+import Heading from "@/components/Heading";
+import SectionStructure from "@/components/SectionStructure";
+import SubHeading from "@/components/SubHeading";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -37,16 +41,16 @@ export default function Login() {
     }
 
   return (
-    <section className="lg:col-span-4 p-6 md:p-8 space-y-6 max-w-xl mx-auto">
-      <div>
-        <h2 className="text-4xl font-medium text-center">Welcome Back!</h2>
-      </div>
+    <SectionStructure>
+      <SubHeading text="User Login" />
+      <Heading texts={["Welcome Back!"]} />
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="space-y-5 mt-16 border-2 border-black/10 p-8 max-w-2xl mx-auto"
+      >
         <div className="form-control w-full">
-          <label className="label py-1">
-            <span className="label-text uppercase tracking-wider">email</span>
-          </label>
+          <FormLabel label="Email" />
           <input
             type="email"
             className="input w-full border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none h-11"
@@ -59,11 +63,7 @@ export default function Login() {
         </div>
 
         <div className="form-control w-full">
-          <label className="label py-1">
-            <span className="label-text uppercase tracking-wider">
-              Password
-            </span>
-          </label>
+          <FormLabel label="Password" />
           <input
             type="password"
             className="input w-full border border-white/20 focus:border-[#c5a880] focus:outline-none rounded-none h-11 "
@@ -99,6 +99,6 @@ export default function Login() {
           Continue With Google
         </button>
       </div>
-    </section>
+    </SectionStructure>
   );
 }

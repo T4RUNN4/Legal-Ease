@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@/components/Button";
+import FormLabel from "@/components/FormLabel";
 import Heading from "@/components/Heading";
 import SectionStructure from "@/components/SectionStructure";
 import SubHeading from "@/components/SubHeading";
@@ -67,11 +68,7 @@ export default function Register() {
         className="space-y-5 mt-16 border-2 border-black/10 p-8 max-w-2xl mx-auto"
       >
         <div className="form-control w-full">
-          <label className="label py-1 font-bold">
-            <span className="label-text text-black font-semibold uppercase tracking-wider">
-              Your Role
-            </span>
-          </label>
+          <FormLabel label="Your Role" />
           <div className="grid grid-cols-2 gap-4 mt-1">
             <label className="relative flex items-center justify-center border border-[#c5a880] p-3 cursor-pointer transition-all bg-[#fdfbf7] text-[#43311c] has-checked:bg-[#43311c] has-checked:text-white hover:bg-white/5 ">
               <input
@@ -101,11 +98,7 @@ export default function Register() {
         </div>
 
         <div className="form-control w-full">
-          <label className="label py-1">
-            <span className="label-text text-black font-semibold uppercase tracking-wider">
-              Full Name
-            </span>
-          </label>
+          <FormLabel label="Full Name" />
           <input
             type="text"
             className="border border-[#43311c]/20 focus:border-[#c5a880] focus:outline-none rounded-none w-full transition-colors px-4 py-2"
@@ -120,11 +113,7 @@ export default function Register() {
         </div>
 
         <div className="form-control w-full flex flex-col gap-2">
-          <label className="label py-1">
-            <span className="label-text text-black font-semibold uppercase tracking-wider">
-              Email Address
-            </span>
-          </label>
+          <FormLabel label="Email Adress" />
           <input
             type="email"
             className="border border-[#43311c]/20 focus:border-[#c5a880] focus:outline-none rounded-none w-full transition-colors px-4 py-2"
@@ -139,11 +128,7 @@ export default function Register() {
         </div>
 
         <div className="form-control w-full">
-          <label className="label py-1">
-            <span className="label-text text-black font-semibold uppercase tracking-wider">
-              Profile Photo URL
-            </span>
-          </label>
+          <FormLabel label="Profile Photo" />
           <input
             type="text"
             className="border border-[#43311c]/20 focus:border-[#c5a880] focus:outline-none rounded-none w-full transition-colors px-4 py-2"
@@ -160,11 +145,7 @@ export default function Register() {
         </div>
 
         <div className="form-control w-full">
-          <label className="label py-1">
-            <span className="label-text text-black font-semibold uppercase tracking-wider">
-              Password
-            </span>
-          </label>
+          <FormLabel label="Password" />
           <input
             type="password"
             className="border border-[#43311c]/20 focus:border-[#c5a880] focus:outline-none rounded-none w-full transition-colors px-4 py-2"
@@ -185,11 +166,7 @@ export default function Register() {
         </div>
 
         <div className="form-control w-full">
-          <label className="label py-1">
-            <span className="label-text text-black font-semibold uppercase tracking-wider">
-              Confirm Password
-            </span>
-          </label>
+          <FormLabel label="Confirm Password" />
           <input
             type="password"
             className="border border-[#43311c]/20 focus:border-[#c5a880] focus:outline-none rounded-none w-full transition-colors px-4 py-2"
