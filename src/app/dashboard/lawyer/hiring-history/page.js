@@ -1,5 +1,11 @@
 "use client";
+import Button from "@/components/Button";
+import Heading from "@/components/Heading";
+import SectionStructure from "@/components/SectionStructure";
+import SubHeading from "@/components/SubHeading";
+import TableRow from "@/components/TableRow";
 import { authClient } from "@/lib/auth-client";
+import Table from "@/sections/Table";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -51,56 +57,52 @@ export default function LawyerHiringHistory() {
   }
 
   return (
-    <section className="space-y-6 mt-10 flex flex-col items-center">
-      <div className="flex flex-col gap-2">
-        <h2 className="text-4xl font-medium">Client Hiring History</h2>
-      </div>
+    <SectionStructure>
+      <SubHeading text="Hiring History" />
+      <Heading texts={["Client Hiring Requests"]} />
 
-      <div className="border border-white/20">
-        <table className="table w-full rounded-none text-center mt-8">
-          <thead>
-            <tr className="border-b border-white/10 uppercase tracking-wider text-xl">
-              <th className="py-4 px-6 rounded-none font-medium">
-                Client Name
-              </th>
-              <th className="py-4 px-6 font-medium">Date</th>
-              <th className="py-4 px-6 rounded-none font-medium">Status</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-white/5 text-lg text-center">
-            {hiring.map((hire) => (
-              <tr key={hire._id} className="hover:bg-white/5 transition-colors">
-                <td className="py-4 px-6 font-medium ">{hire.userName}</td>
-                <td className="py-4 px-6">
-                  {format(new Date(hire.hiredAt), "PPPP")}
-                </td>
-                <td className="py-4 px-6 flex gap-2">
-                  {hire.status === "pending" ? (
-                    <>
-                      <button
-                        onClick={() => updateStatus(hire._id, "unpaid")}
-                        className="btn inline-block text-sm uppercase tracking-wider px-3 py-1 rounded-none font-medium bg-emerald-950 text-white border border-emerald-800"
-                      >
-                        Accept
-                      </button>
-                      <button
-                        onClick={() => updateStatus(hire._id, "rejected")}
-                        className="btn inline-block text-sm uppercase tracking-wider px-3 py-1 rounded-none font-medium bg-rose-950 text-white border border-rose-900"
-                      >
-                        Reject
-                      </button>
-                    </>
-                  ) : (
-                    <span className="inline-block text-sm uppercase tracking-wider px-3 py-1 rounded-none font-medium">
-                      {hire.status}
-                    </span>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="mt-16">
+        <Table tableHeads={["Client Name", "Date", "Status"]}>
+          {hiring.map((hire) => (
+            <TableRow key={hire._id}>
+              <td className="py-4 px-6 font-medium ">{hire.userName}</td>
+              <td className="py-4 px-6">
+                {format(new Date(hire.hiredAt), "PPP")}
+              </td>
+              <td className="py-4 px-6 flex gap-2">
+                {hire.status === "pending" ? (
+                  <>
+                    <Button
+                      text="Accept"
+                      type="action"
+                      variant="payment"
+                      action={() => updateStatus(hire._id, "unpaid")}
+                    />
+                    <Button
+                      text="Reject"
+                      type="action"
+                      variant="delete"
+                      action={() => updateStatus(hire._id, "rejected")}
+                    />
+                  </>
+                ) : (
+                  <span
+                    className={`uppercase tracking-wider rounded-none ${
+                      hire.status === "paid"
+                        ? "text-emerald-600"
+                        : hire.status === "rejected"
+                          ? "text-rose-600"
+                          : "text-gray-400"
+                    }`}
+                  >
+                    {hire.status}
+                  </span>
+                )}
+              </td>
+            </TableRow>
+          ))}
+        </Table>
       </div>
-    </section>
+    </SectionStructure>
   );
 }
