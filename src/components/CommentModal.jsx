@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import Button from "./Button";
 import { toast } from "react-toastify";
 
-export default function CommentModal({ name, userName, userId, lawyerId }) {
+export default function CommentModal({ name, userName, userId, lawyerId, fetchComments }) {
   const {
     register,
     handleSubmit,
@@ -13,6 +13,7 @@ export default function CommentModal({ name, userName, userId, lawyerId }) {
   const onSubmit = async (data) => {
     const formattedData = {
       ...data,
+      lawyerName: name,
       userId: userId,
       userName: userName,
       lawyerId: lawyerId,
@@ -35,6 +36,7 @@ export default function CommentModal({ name, userName, userId, lawyerId }) {
     if(ret) {
         toast.success("Your comment is recorded successfully");
         reset();
+        fetchComments();
         document.getElementById("comment").close();
     } else {
         toast.error("Something went wrong");
