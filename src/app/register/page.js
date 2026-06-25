@@ -8,6 +8,7 @@ import SubHeading from "@/components/SubHeading";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -19,19 +20,42 @@ export default function Register() {
     watch,
     reset,
   } = useForm();
+  const [isUploading, setIsUploading] = useState(false);
 
   const password = watch("password");
   const role = watch("role");
   const router = useRouter();
 
+  const IMGBB_API_KEY = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
+
   const onSubmit = async (data) => {
+    let imageUrl = "";
+    setIsUploading(true);
+
+    const imageFile = data.photo[0];
+    const formData = new FormData();
+    formData.append("image", imageFile);
+
+    const imgbbResponse = await fetch(
+      `https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`,
+      {
+        method: "POST",
+        body: formData,
+      },
+    );
+
+    const imgbbData = await imgbbResponse.json();
+    imageUrl = imgbbData.data.url;
+
     const { data: res, error } = await authClient.signUp.email({
       name: data.name,
       email: data.email,
       password: data.password,
       role: data.role,
-      image: data.photo,
+      image: imageUrl,
     });
+
+    setIsUploading(false);
 
     if (error) {
       toast.error(error.message || "Something went wrong");
@@ -67,7 +91,9 @@ export default function Register() {
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-5 mt-16 border-2 border-black/10 p-8 max-w-2xl mx-auto"
       >
-        <h3 className="text-3xl font-bold mt-4 mb-10 text-center">Registration From</h3>
+        <h3 className="text-3xl font-bold mt-4 mb-10 text-center">
+          Registration From
+        </h3>
         <div className="form-control w-full">
           <FormLabel label="Your Role" />
           <div className="grid grid-cols-2 gap-4 mt-1">
@@ -131,11 +157,12 @@ export default function Register() {
         <div className="form-control w-full">
           <FormLabel label="Profile Photo" />
           <input
-            type="text"
+            type="file"
+            accept="image/*"
             className="border border-[#43311c]/20 focus:border-[#c5a880] focus:outline-none rounded-none w-full transition-colors px-4 py-2"
             placeholder="https://images.unsplash.com/your-portrait"
             {...register("photo", {
-              required: "Profile photo path is required",
+              required: "Profile photo is required",
             })}
           />
           {errors.photo && (
