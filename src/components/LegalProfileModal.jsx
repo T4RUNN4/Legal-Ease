@@ -17,7 +17,7 @@ export default function LegalProfileModal({ fetchLegalProfile, user }) {
     const formattedData = {
         fee: data.fee,
         summary: data.summary,
-        specialization: data.specialization
+        specialization: data.specialization,
         name: user.name,
         user: user.id,
         gotHired: 0,
