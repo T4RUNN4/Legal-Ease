@@ -15,7 +15,9 @@ export default function LegalProfileModal({ fetchLegalProfile, user }) {
 
   const onSubmit = async (data) => {
     const formattedData = {
-        ...data,
+        fee: data.fee,
+        summary: data.summary,
+        specialization: data.specialization
         name: user.name,
         user: user.id,
         gotHired: 0,
