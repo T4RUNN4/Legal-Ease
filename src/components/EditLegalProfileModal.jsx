@@ -5,51 +5,50 @@ import Button from "./Button";
 import FormLabel from "./FormLabel";
 import { toast } from "react-toastify";
 
-export default function LegalProfileModal({ fetchLegalProfile, user }) {
+export default function EditLegalProfileModal({
+  legalProfile,
+  fetchLegalProfile,
+}) {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm();
+  } = useForm({
+    values: {
+      specialization: legalProfile.specialization,
+      fee: legalProfile.fee,
+      summary: legalProfile.summary,
+    },
+  });
 
   const onSubmit = async (data) => {
-    const formattedData = {
-        ...data,
-        name: user.name,
-        user: user.id,
-        gotHired: 0,
-        photo: user.image,
-        status: "available",
-        client: [],
-        createdAt: new Date(),
-        publishingFee: "unpaid",
-    }
-
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/lawyer/add-new`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/lawyer/legal-profile/${legalProfile._id}`,
       {
-        method: "POST",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formattedData),
+        body: JSON.stringify({
+          fee: data.fee,
+          specialization: data.specialization,
+          summary: data.summary,
+        }),
       },
     );
-    const ret = res.json()
 
-    if(ret) {
-        reset();
-        fetchLegalProfile();
-        toast.success("New Legal Profile Added");
-        toast.info("Pay activation fee to activate profile")
-        document.getElementById("legal_profile_modal").close();
+    const ret = await res.json();
+    if (ret) {
+      toast.success("Legal Profile Updated Successfully!");
+      fetchLegalProfile();
+      document.getElementById("edit_legal_profile_modal").close();
     }
   };
 
   return (
     <dialog
-      id="legal_profile_modal"
+      id="edit_legal_profile_modal"
       className="modal modal-bottom sm:modal-middle"
     >
       <div className="modal-box">
@@ -57,11 +56,8 @@ export default function LegalProfileModal({ fetchLegalProfile, user }) {
           onSubmit={handleSubmit(onSubmit)}
           className="space-y-5 border-2 border-black/10 p-8 max-w-2xl mx-auto"
         >
-          <div className="flex items-end justify-items-end">
-            <button onClick={() => document.getElementById("legal_profile_modal").close()} className="btn">X</button>
-          </div>
           <h3 className="text-3xl font-bold mt-4 mb-10 text-center">
-            Add New Profile
+            Edit Your Profile
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="form-control w-full">

@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@/components/Button";
+import EditLegalProfileModal from "@/components/EditLegalProfileModal";
 import Fallback from "@/components/Fallback";
 import Heading from "@/components/Heading";
 import LegalProfileModal from "@/components/LegalProfileModal";
@@ -21,6 +22,8 @@ export default function LegalProfile() {
   const userId = session?.user?.id;
 
   const [legalProfiles, setLegalProfiles] = useState(null);
+  const [activeLegalProfile, setActiveLegalProfile] = useState(null);
+
   const fetchLegalProfile = async () => {
     if (!userId) return;
 
@@ -29,7 +32,6 @@ export default function LegalProfile() {
     );
 
     const data = await res.json();
-    console.log(data);
     setLegalProfiles(data);
   };
 
@@ -47,6 +49,13 @@ export default function LegalProfile() {
     );
     const data = await res.json();
     window.location.href = data.url;
+  };
+
+  const handleEdit = async (legalProfile) => {
+    setActiveLegalProfile(legalProfile);
+    setTimeout(() => {
+      document.getElementById("edit_legal_profile_modal").showModal();
+    }, 50);
   };
 
   const handleDelete = async (lawyerId) => {
@@ -89,7 +98,12 @@ export default function LegalProfile() {
                   />
                   <td className="py-4 md:py-6 flex flex-col md:flex-row gap-4">
                     {legalProfile.publishingFee === "paid" ? (
-                      <Button type="action" variant="payment" text="Edit" />
+                      <Button
+                        type="action"
+                        variant="payment"
+                        text="Edit"
+                        action={() => handleEdit(legalProfile)}
+                      />
                     ) : (
                       <Button
                         type="action"
@@ -126,6 +140,9 @@ export default function LegalProfile() {
         user={session?.user}
         fetchLegalProfile={fetchLegalProfile}
       />
+      {activeLegalProfile && (
+        <EditLegalProfileModal legalProfile={activeLegalProfile} fetchLegalProfile={fetchLegalProfile} />
+      )}
     </SectionStructure>
   );
 }
