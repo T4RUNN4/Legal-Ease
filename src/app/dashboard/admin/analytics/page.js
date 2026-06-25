@@ -13,10 +13,10 @@ export default async function Analytics() {
         <Heading texts={["Analytics Dashboard"]} />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
-          <AnalyticsCard title="Total User" value={stats.totalUser} />
-          <AnalyticsCard title="Total Lawyers" value={stats.totalLawyer} />
-          <AnalyticsCard title="Total Hire" value={stats.totalHires} />
-          <AnalyticsCard title="Total Revenue" value={`$${stats.totalRevenue}`} />
+          <AnalyticsCard title="Registered User" value={stats.totalUser} />
+          <AnalyticsCard title="Lawyers Profile" value={stats.totalLawyer} />
+          <AnalyticsCard title="Hiring" value={stats.totalHires} />
+          <AnalyticsCard title="Revenue" value={`$${stats.totalRevenue}`} />
         </div>
       </SectionStructure>
     );
