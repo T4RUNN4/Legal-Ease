@@ -118,7 +118,7 @@ export default function EditLegalProfileModal({
           <div className="pt-2">
             <Button
               type="action"
-              text="Comment"
+              text="Update"
               btnType="Submit"
               variant="dark"
             />
