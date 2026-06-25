@@ -12,7 +12,9 @@ import TableRow from "@/components/TableRow";
 import { authClient } from "@/lib/auth-client";
 import Table from "@/sections/Table";
 import { format } from "date-fns";
+import { processFetch } from "next/dist/client/components/router-reducer/fetch-server-response";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function LegalProfile() {
   const { data: session } = authClient.useSession();
@@ -47,6 +49,24 @@ export default function LegalProfile() {
     window.location.href = data.url;
   };
 
+  const handleDelete = async (lawyerId) => {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/lawyer/profile/${lawyerId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    const ret = await res.json();
+
+    if (ret) {
+      toast.success("Your profile is deleted");
+      fetchLegalProfile();
+    }
+  };
+
   return (
     <SectionStructure>
       <SubHeading text="Legal Profile List" />
@@ -71,9 +91,19 @@ export default function LegalProfile() {
                     {legalProfile.publishingFee === "paid" ? (
                       <Button type="action" variant="payment" text="Edit" />
                     ) : (
-                      <Button type="action" variant="payment" text="Pay" action={() => handleCheckout(legalProfile._id)} />
+                      <Button
+                        type="action"
+                        variant="payment"
+                        text="Pay"
+                        action={() => handleCheckout(legalProfile._id)}
+                      />
                     )}
-                    <Button type="action" variant="delete" text="Delete" />
+                    <Button
+                      type="action"
+                      variant="delete"
+                      text="Delete"
+                      action={() => handleDelete(legalProfile._id)}
+                    />
                   </td>
                 </TableRow>
               );
@@ -92,7 +122,10 @@ export default function LegalProfile() {
           text="Create New"
         />
       </div>
-      <LegalProfileModal user={session?.user} fetchLegalProfile={fetchLegalProfile} />
+      <LegalProfileModal
+        user={session?.user}
+        fetchLegalProfile={fetchLegalProfile}
+      />
     </SectionStructure>
   );
 }
