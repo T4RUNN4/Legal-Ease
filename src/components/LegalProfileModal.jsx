@@ -122,7 +122,7 @@ export default function LegalProfileModal({ fetchLegalProfile, user }) {
           <div className="pt-2">
             <Button
               type="action"
-              text="Comment"
+              text="Create"
               btnType="Submit"
               variant="dark"
             />
