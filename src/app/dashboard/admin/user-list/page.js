@@ -75,29 +75,59 @@ export default function UserList() {
       <Heading texts={["Registered Users of Legal Ease"]} />
 
       <div className="border border-white/10 mt-16 w-full">
-        <Table tableHeads={["Name", "Email", "Role", "Actions"]}>
-          {users.map((user) => (
-            <TableRow key={user._id}>
-              <TableData text={user.name} />
-              <TableData text={user.email} />
-              <td className="py-4 md:px-6 uppercase">{user.role}</td>
-              <td className="py-4 md:px-6 flex flex-col md:flex-row gap-2">
-                <Button
-                  text={user.role === "lawyer" ? "client" : "lawyer"}
-                  variant="dark"
-                  type="action"
-                  action={() => handleRoleChange(user.role, user._id)}
-                />
-                <Button
-                  text="Delete"
-                  type="action"
-                  variant="delete"
-                  action={() => handleDelete(user._id)}
-                />
-              </td>
-            </TableRow>
-          ))}
-        </Table>
+        <div className="hidden md:flex">
+          <Table tableHeads={["Name", "Email", "Role", "Actions"]}>
+            {users.map((user) => (
+              <TableRow key={user._id}>
+                <TableData text={user.name} />
+                <TableData text={user.email} />
+                <td className="py-4 md:px-6 first-letter:uppercase">
+                  {user.role}
+                </td>
+                <td className="py-4 md:px-6 flex flex-col md:flex-row gap-2">
+                  <Button
+                    text={user.role === "lawyer" ? "client" : "lawyer"}
+                    variant="dark"
+                    type="action"
+                    action={() => handleRoleChange(user.role, user._id)}
+                  />
+                  <Button
+                    text="Delete"
+                    type="action"
+                    variant="delete"
+                    action={() => handleDelete(user._id)}
+                  />
+                </td>
+              </TableRow>
+            ))}
+          </Table>
+        </div>
+        <div className="md:hidden">
+          <Table tableHeads={["Email", "Role", "Actions"]}>
+            {users.map((user) => (
+              <TableRow key={user._id}>
+                <TableData text={user.email} />
+                <td className="py-4 md:px-6 first-letter:uppercase">
+                  {user.role}
+                </td>
+                <td className="py-4 md:px-6 flex flex-col md:flex-row gap-2">
+                  <Button
+                    text={user.role === "lawyer" ? "client" : "lawyer"}
+                    variant="dark"
+                    type="action"
+                    action={() => handleRoleChange(user.role, user._id)}
+                  />
+                  <Button
+                    text="Delete"
+                    type="action"
+                    variant="delete"
+                    action={() => handleDelete(user._id)}
+                  />
+                </td>
+              </TableRow>
+            ))}
+          </Table>
+        </div>
       </div>
     </SectionStructure>
   );
