@@ -1,4 +1,6 @@
 import Link from "next/link";
+import SubHeading from "./SubHeading";
+import Button from "./Button";
 
 export default function Footer() {
   return (
@@ -7,10 +9,10 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-12">
           <div className="md:col-span-4 flex flex-col justify-between gap-6">
             <div>
-              <span className="text-2xl font-semibold tracking-wider block mb-4">
+              <Link href="/" className="text-3xl font-bold tracking-wider block mb-4">
                 Legal Ease
-              </span>
-              <p className="text-sm max-w-sm leading-relaxed text-justify">
+              </Link>
+              <p className=" max-w-sm leading-relaxed text-justify">
                 LegalEase is a digital platform that connects legal seekers,
                 clients, and businesses with talented lawyers.
               </p>
@@ -48,10 +50,8 @@ export default function Footer() {
           </div>
 
           <div className="md:col-span-3 md:pl-8">
-            <span className="text-xs tracking-widest uppercase block mb-4">
-              Quick Links
-            </span>
-            <ul className="space-y-3 text-sm">
+            <SubHeading text="Quick Link" />
+            <ul className="space-y-3 ">
               <li>
                 <Link
                   href="/"
@@ -88,31 +88,22 @@ export default function Footer() {
           </div>
 
           <div className="md:col-span-5 flex flex-col justify-start">
-            <span className="tracking-widest text-[#c5a880] uppercase block mb-4">
-              Newsletter Signup
-            </span>
-            <p className="text-sm] mb-4 leading-relaxed">
+            <SubHeading text="Newsletter" />
+            <p className="] mb-4 leading-relaxed">
               Subscribe to our legal briefings for analytical reviews of
               corporate governance regulations and Supreme Court updates.
             </p>
 
-            <div className="navbar-end flex flex-col gap-4">
-              <label className="input">
-                <input type="email" required placeholder="Your Email" />
-              </label>
-              <Link
-                href="/lawyers"
-                className="btn bg-[#43311c] text-[#fdfbf7] hover:bg-[#352514] border-none rounded-none px-5 py-2 min-h-0 h-auto font-medium text-xs tracking-wider shrink-0 uppercase"
-              >
-                Subscribe
-              </Link>
+            <div className="flex flex-col md:flex-row gap-4">
+              <input type="email" placeholder="Your Email" className="border border-[#43311c]/20 focus:border-[#c5a880] focus:outline-none rounded-none w-full transition-colors px-4 py-2" />
+              <Button type="action" variant="dark" text="Subscribe" />
             </div>
           </div>
         </div>
 
         <div className="border-t border-white/10 pt-8 mt-12 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
           <div>
-            &copy; {new Date().getFullYear()} Vertex Legal. All rights reserved.
+            &copy; {new Date().getFullYear()} Legal Ease. All rights reserved.
           </div>
           <div className="flex gap-6">
             <a href="#" className="hover:text-[#fdfbf7] transition-colors">
