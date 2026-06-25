@@ -5,6 +5,7 @@ import CommentCard from "@/components/CommentCard";
 import CommentModal from "@/components/CommentModal";
 import Heading from "@/components/Heading";
 import HiringModal from "@/components/HiringModal";
+import Loading from "@/components/Loading";
 import SectionStructure from "@/components/SectionStructure";
 import SubHeading from "@/components/SubHeading";
 import { authClient } from "@/lib/auth-client";
@@ -48,7 +49,7 @@ export default function LawyerDetails() {
   }, [id]);
 
   if (!lawyer) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   const handleHiring = async () => {

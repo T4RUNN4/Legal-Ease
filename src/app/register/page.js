@@ -212,7 +212,7 @@ export default function Register() {
           )}
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex flex-col md:flex-row gap-4">
           <Button
             text="Register"
             type="action"
