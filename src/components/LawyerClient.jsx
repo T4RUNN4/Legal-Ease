@@ -99,11 +99,11 @@ export default function LawyersClient() {
           className="bg-[#352514] border border-white/10 shadow-2xl rounded-none text-white px-8 py-4"
         >
           <option value="">All</option>
-          <option value="Criminal Defense">Criminal Defense</option>
-          <option value="Corporate & Business">Corporate & Business</option>
-          <option value="Family & Matrimonial">Family & Matrimonial</option>
-          <option value="Real Estate & Property">Real Estate & Property</option>
-          <option value="Employment & Labour">Employment & Labour</option>
+          <option value="criminal defense">Criminal Defense</option>
+          <option value="corporate & business">Corporate & Business</option>
+          <option value="family & matrimonial">Family & Matrimonial</option>
+          <option value="real estate & property">Real Estate & Property</option>
+          <option value="employment & labour">Employment & Labour</option>
         </select>
       </div>
 

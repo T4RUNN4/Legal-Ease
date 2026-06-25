@@ -8,6 +8,7 @@ import HiringModal from "@/components/HiringModal";
 import SectionStructure from "@/components/SectionStructure";
 import SubHeading from "@/components/SubHeading";
 import { authClient } from "@/lib/auth-client";
+import { format } from "date-fns";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -125,7 +126,7 @@ export default function LawyerDetails() {
                 Joined At:
               </span>
               <span className="text-3xl font-medium text-[#c5a880]">
-                {lawyer.createdAt || "June 21, 2026"}
+                {format(new Date(lawyer.createdAt), "PPP")}
               </span>
             </div>
           </div>

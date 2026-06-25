@@ -40,7 +40,7 @@ export default function TopOne({ lawyer }) {
           <h3 className="text-2xl md:text-3xl font-medium mb-1 text-white">
             {lawyer.name}
           </h3>
-          <p className="text-[#c5a880] text-sm font-medium tracking-wide mb-4">
+          <p className="text-[#c5a880] text-sm font-medium tracking-wide mb-4 uppercase">
             {lawyer.specialization}
           </p>
         </div>

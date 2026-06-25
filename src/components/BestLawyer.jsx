@@ -37,7 +37,7 @@ export default function BestLawyer({ lawyer }) {
 
       <motion.div variants={itemVariants} className="flex flex-col justify-center">
         <h4 className="text-xl font-medium mb-1">{lawyer.name}</h4>
-        <p className="text-sm text-[#c7bca9] mb-4">{lawyer.specialization}</p>
+        <p className="text-sm text-[#c7bca9] mb-4 uppercase">{lawyer.specialization}</p>
         <Link
           href={`/lawyers/list/${lawyer._id}`}
           className="text-xs font-semibold tracking-wider text-[#c5a880] hover:text-black transition-colors flex items-center gap-1"

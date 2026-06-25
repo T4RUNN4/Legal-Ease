@@ -8,34 +8,34 @@ export default function LegalCategories () {
     {
       title: "Criminal Defense",
       code: "01",
-      link: "Criminal+Defense",
+      link: "criminal+defense",
     },
     {
       title: "Corporate & Business",
       code: "02",
-      link: "Corporate+%26+Business",
+      link: "corporate+%26+business",
     },
     {
       title: "Family & Matrimonial",
       code: "03",
-      link: "Family+%26+Matrimonial",
+      link: "family+%26+matrimonial",
     },
     {
       title: "Real Estate & Property",
       code: "04",
-      link: "Real+Estate+%26+Property",
+      link: "real+estate+%26+property",
     },
     {
       title: "Employment & Labor",
       code: "05",
-      link: "Employment+%26+Labour",
+      link: "employment+%26+labour",
     },
   ];
 
   return (
     <SectionStructure>
-        <SubHeading text="Exprest from every discipline" />
-        <Heading texts={["Legal Categories"]} />
+      <SubHeading text="Exprest from every discipline" />
+      <Heading texts={["Legal Categories"]} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
         {categories.map((category, index) => (
