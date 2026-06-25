@@ -56,80 +56,48 @@ export default function UserHiringHistory() {
         <Fallback text="You didn't hired any lawyer yet" />
       ) : (
         <div className="border border-white/10 mt-16 w-full flex items-center justify-center">
-          <div className="hidden md:flex">
-            <Table
-              tableHeads={["Name", "Category", "Fee", "Hiring Date", "Status"]}
-            >
-              {hiring.map((hire) => (
-                <TableRow key={hire._id}>
-                  <TableData text={hire.lawyerName} />
-                  <TableData text={hire.specialization} />
-                  <TableData text={`$${hire.fee}`} />
-                  <TableData text={format(new Date(hire.hiredAt), "PPP")} />
-                  <TableData
-                    text={
-                      hire.status === "unpaid" ? (
-                        <Button
-                          text="Pay"
-                          type="action"
-                          variant="payment"
-                          action={() => handleCheckout(hire._id)}
-                        />
-                      ) : (
-                        <span
-                          className={`uppercase tracking-wider rounded-none ${
-                            hire.status === "paid"
-                              ? "text-emerald-600"
-                              : hire.status === "rejected"
-                                ? "text-rose-600"
-                                : "text-gray-400"
-                          }`}
-                        >
-                          {hire.status}
-                        </span>
-                      )
-                    }
-                  />
-                </TableRow>
-              ))}
-            </Table>
-          </div>
-          <div className="md:hidden">
-            <Table
-              tableHeads={["Name", "Fee", "Status"]}
-            >
-              {hiring.map((hire) => (
-                <TableRow key={hire._id}>
-                  <TableData text={hire.lawyerName} />
-                  <TableData text={`$${hire.fee}`} />
-                  <TableData
-                    text={
-                      hire.status === "unpaid" ? (
-                        <Button
-                          text="Pay"
-                          type="action"
-                          variant="payment"
-                          action={() => handleCheckout(hire._id)}
-                        />
-                      ) : (
-                        <span
-                          className={`uppercase tracking-wider rounded-none ${
-                            hire.status === "paid"
-                              ? "text-emerald-600"
-                              : hire.status === "rejected"
-                                ? "text-rose-600"
-                                : "text-gray-400"
-                          }`}
-                        >
-                          {hire.status}
-                        </span>
-                      )
-                    }
-                  />
-                </TableRow>
-              ))}
-            </Table>
-          </div>
+          <Table
+            tableHeads={[
+              "Name",
+              "Category",
+              "Fee",
+              "Hiring Date",
+              "Status",
+            ]}
+          >
+            {hiring.map((hire) => (
+              <TableRow key={hire._id}>
+                <TableData text={hire.lawyerName} />
+                <TableData text={hire.specialization} />
+                <TableData text={`$${hire.fee}`} />
+                <TableData text={format(new Date(hire.hiredAt), "PPP")} />
+                <TableData
+                  text={
+                    hire.status === "unpaid" ? (
+                      <Button
+                        text="Pay"
+                        type="action"
+                        variant="payment"
+                        action={() => handleCheckout(hire._id)}
+                      />
+                    ) : (
+                      <span
+                        className={`uppercase tracking-wider rounded-none ${
+                          hire.status === "paid"
+                            ? "text-emerald-600"
+                            : hire.status === "rejected"
+                              ? "text-rose-600"
+                              : "text-gray-400"
+                        }`}
+                      >
+                        {hire.status}
+                      </span>
+                    )
+                  }
+                />
+              </TableRow>
+            ))}
+          </Table>
         </div>
       )}
     </SectionStructure>
