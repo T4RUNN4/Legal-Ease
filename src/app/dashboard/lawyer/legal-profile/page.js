@@ -3,6 +3,7 @@
 import Button from "@/components/Button";
 import Fallback from "@/components/Fallback";
 import Heading from "@/components/Heading";
+import LegalProfileModal from "@/components/LegalProfileModal";
 import Loading from "@/components/Loading";
 import SectionStructure from "@/components/SectionStructure";
 import SubHeading from "@/components/SubHeading";
@@ -74,8 +75,16 @@ export default function LegalProfile() {
       </div>
 
       <div className="flex items-end justify-end mt-8">
-        <Button type="action" variant="dark" text="Create New" />
+        <Button
+          action={() =>
+            document.getElementById("legal_profile_modal").showModal()
+          }
+          type="action"
+          variant="dark"
+          text="Create New"
+        />
       </div>
+      <LegalProfileModal user={session?.user} fetchLegalProfile={fetchLegalProfile} />
     </SectionStructure>
   );
 }
