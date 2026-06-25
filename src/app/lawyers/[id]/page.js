@@ -56,7 +56,8 @@ export default function LawyerDetails() {
       const data = {
         userId: user.id,
         userName: user.name,
-        lawyerId: lawyer._id,
+        lawyerId: lawyer.user,
+        lawyerProfileId: lawyer._id,
         lawyerName: lawyer.name,
         hiredAt: new Date().toISOString(),
         status: "pending",

@@ -22,16 +22,11 @@ export default function LawyerHiringHistory() {
   const loadHiringHistory = async () => {
     if (!userID) return;
 
-    const res1 = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/lawyers/find/${userID}`,
-    );
-    const lawyer = await res1.json();
-
-    const res2 = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/lawyer/hiring-history/${lawyer._id}`,
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/lawyer/hiring-history/${userID}`,
     );
 
-    const hiringData = await res2.json();
+    const hiringData = await res.json();
     setHiring(hiringData);
   };
 

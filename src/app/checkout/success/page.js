@@ -4,9 +4,20 @@ import SectionStructure from "@/components/SectionStructure";
 import SubHeading from "@/components/SubHeading";
 
 export default async function PaymentSuccess({ searchParams }) {
-  const { session_id, hiringId } = await searchParams;
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/verify-payment?session_id=${session_id}&hiringId=${hiringId}`)
-  const data = await res.json();
+  let data;
+  const { session_id, hiringId, lawyerId } = await searchParams;
+  
+  if(hiringId) {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/verify-payment?session_id=${session_id}&hiringId=${hiringId}`,
+    );
+    data = await res.json();
+  } else {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/verify-lawyer?session_id=${session_id}&lawyerId=${lawyerId}`,
+    );
+    data = await res.json();
+  }
 
   if(!data) {
     return <div>Loading...</div>

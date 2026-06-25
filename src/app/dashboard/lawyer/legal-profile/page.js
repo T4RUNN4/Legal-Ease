@@ -39,6 +39,14 @@ export default function LegalProfile() {
     return <Loading />;
   }
 
+  const handleCheckout = async (lawyerId) => {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/checkout/lawyer/${lawyerId}`,
+    );
+    const data = await res.json();
+    window.location.href = data.url;
+  };
+
   return (
     <SectionStructure>
       <SubHeading text="Legal Profile List" />
@@ -63,7 +71,7 @@ export default function LegalProfile() {
                     {legalProfile.publishingFee === "paid" ? (
                       <Button type="action" variant="payment" text="Edit" />
                     ) : (
-                      <Button type="action" variant="payment" text="Pay" />
+                      <Button type="action" variant="payment" text="Pay" action={() => handleCheckout(legalProfile._id)} />
                     )}
                     <Button type="action" variant="delete" text="Delete" />
                   </td>
